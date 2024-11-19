@@ -1,0 +1,8 @@
+{
+    "C_Cpp.default.includePath": [
+        "include",
+        "My_logging_system/include",
+        "include/tree",
+        "Stack/include"
+    ],
+}
