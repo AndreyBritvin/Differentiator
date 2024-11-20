@@ -143,23 +143,24 @@ err_code_t make_node(FILE* dot_file, node_t* curr_node, node_t* node_to_select, 
         DOT_("\", constraint = false];\n");
         DOT_("info_node->tree%p;", curr_node);
     }
+
+    if      (curr_node->type == NUM) fill_color = NUM_COLOR;
+    else if (curr_node->type == VAR) fill_color = VAR_COLOR;
+    else if (curr_node->type == OP ) fill_color =  OP_COLOR;
+
     if (curr_node->left == NULL && curr_node->right == NULL)
     {
-        if      (curr_node->parent->left  == curr_node) fill_color = END_NO_COLOR;
-        else if (curr_node->parent->right == curr_node) fill_color = END_YES_COLOR;
-    }
-    else
-    {
-        if      (curr_node->parent        == NULL     ) fill_color = DEFAULT_SHAPE_COLOR;
-        else if (curr_node->parent->left  == curr_node) fill_color = TREE_NO_COLOR;
-        else if (curr_node->parent->right == curr_node) fill_color = TREE_YES_COLOR;
+        if  (curr_node->type == OP)  fill_color = BAD_EDGE_COLOR;
     }
 
+    char * what_to_data = get_data_field(curr_node);
+    const char* type_name = type_to_str(curr_node);
     DOT_("tree%p[shape = record;"  //penwidth = 2.5;"
-         "label = \"{<p> parent = %p|addr = %p |data = %s| {<l> left %p | <r> right %p}}\"; style=\"filled\","
+         "label = \"{<p> parent = %p| addr = %p | type = %s | data = %s | {<l> left %p | <r> right %p}}\"; style=\"filled\","
          "fillcolor = \"%s\" %s];\n",
-                                curr_node, curr_node->parent, curr_node, curr_node->data, curr_node->left,
-                                                                curr_node->right, fill_color, shape_color);
+                                curr_node, curr_node->parent, curr_node, type_name,
+                                what_to_data, curr_node->left, curr_node->right, fill_color, shape_color);
+    free(what_to_data);
 
     const char* edge_color = DEFAULT_EDGE_COLOR;
 
@@ -190,6 +191,48 @@ err_code_t make_node(FILE* dot_file, node_t* curr_node, node_t* node_to_select, 
     }
 
     return OK;
+}
+
+const char* type_to_str(node_t* node)
+{
+    switch (node->type)
+    {
+        case NUM: return "NUM";
+        case VAR: return "VAR";
+        case OP : return "OP";
+        default : return "UNKNOWN";
+    }
+}
+
+char* get_data_field(node_t* node)
+{
+    if (node->type == OP)  return give_op_type(node);
+    if (node->type == NUM) return give_num_type(node);
+    if (node->type == VAR) return give_var_type(node);
+}
+
+char* give_var_type(node_t *node)
+{
+    char* to_ret = (char *) calloc(13, sizeof(char));
+    sprintf(to_ret, "%c", node->data);
+
+    return to_ret;
+}
+
+char* give_num_type(node_t *node)
+{
+    char* to_ret = (char *) calloc(13, sizeof(char));
+    sprintf(to_ret, "%lg", node->data);
+
+    return to_ret;
+}
+
+char* give_op_type(node_t *node)
+{
+    char* to_ret = (char *) calloc(10, sizeof(char));
+    strcpy(to_ret, all_ops[(long) node->data].text);
+
+    return to_ret;
 }
 
 err_code_t paste_instruction()

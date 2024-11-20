@@ -57,21 +57,16 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
     assert(tree);
 
     (*position)++;
-    // char *expression = (char *) calloc(128, sizeof(char));
-    char* expression = (char *) calloc(MAX_STRING_SIZE, sizeof(char));
-    if (expression == NULL)
-    {
-        fprintf(stderr, "Ended memory in fill_node in calloc\n");
-        return NULL;
-    }
 
     size_t len_of_expr = 0;
-    sscanf(buffer + *position, "\"%[^\"]\"%n", expression, &len_of_expr);
+    tree_val_t expression = 0;
+
+    sscanf(buffer + *position, " %lf%ln", &expression, &len_of_expr);
 
     *position += len_of_expr;
 
     tree->size++;
-    node_t* node_to_return = new_node(tree, expression, NULL, NULL);
+    node_t* node_to_return = new_node(tree, 0, 0, NULL, NULL); // TODO: potential error via 0
     node_to_return->parent = parent;
     if (*position == 1)
     {
@@ -80,19 +75,24 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
 
     bool is_left = true;
 
-    while (buffer[*position] != '}')
+    while (buffer[*position] != ')')
     {
         // TREE_DUMP(tree, node_to_return, "Working with this\n Input text = %s", expression);
         // printf("Current char is %c position %zu\n", buffer[*position], *position);
-        if (buffer[*position] == '{' && is_left)
+        if (buffer[*position] == '(' && is_left)
         {
             is_left = false;
             node_to_return->left = fill_node(buffer, position, tree, node_to_return);
         }
 
-        else if (buffer[*position] == '{' && !is_left)
+        else if (buffer[*position] == '(' && !is_left)
         {
             node_to_return->right = fill_node(buffer, position, tree, node_to_return);
+        }
+
+        else
+        {
+            fprintf(stderr, "Some error happened in brackets\n");
         }
 
         (*position)++;
@@ -100,3 +100,8 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
 
     return node_to_return;
 }
+
+// bool check_is_operator(input)
+// {
+//
+// }

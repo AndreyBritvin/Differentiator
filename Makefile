@@ -18,7 +18,7 @@ library:
 	@$(CC) $(CFLAGS) -c $(INCLUDE) $(SRC_FILES) My_logging_system/log_lib.a -o $(BUILD_FILES)
 
 run:
-	./differenciator.out database/data.txt
+	./differenciator.out
 
 clean:
 	rm -rf build

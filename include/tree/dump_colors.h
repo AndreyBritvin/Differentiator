@@ -18,4 +18,8 @@
 #define TREE_YES_COLOR "lawngreen"
 #define TREE_NO_COLOR "lightpink"
 
+#define OP_COLOR  "#e0c292"
+#define VAR_COLOR "coral1"
+#define NUM_COLOR "green3"
+
 #endif // DUMP_COLORS_H_

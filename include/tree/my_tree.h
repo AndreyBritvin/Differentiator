@@ -2,6 +2,7 @@
 #define MY_TREE_H_
 #include <stdlib.h>
 #include "utils.h"
+#include "op_types.h"
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -23,7 +24,7 @@
     #define INIT_TREE(tree_name) my_tree_t tree_name = {};  tree_ctor(&tree_name);
 #endif // NDEBUG
 
-typedef char* tree_val_t;
+typedef double tree_val_t;
 typedef int   op_type_t;
 struct node_t
 {
@@ -46,7 +47,7 @@ struct my_tree_t
 #endif
 };
 
-node_t* new_node(my_tree_t* tree, tree_val_t data, node_t* left_node, node_t* right_node);
+node_t* new_node(my_tree_t* tree, op_type_t type, tree_val_t data, node_t* left_node, node_t* right_node);
 
 err_code_t tree_ctor(my_tree_t* tree);
 err_code_t tree_dtor(my_tree_t* tree);
@@ -54,7 +55,12 @@ err_code_t node_dtor (node_t* tree);
 
 err_code_t print_tree(my_tree_t* tree);
 err_code_t print_node(node_t* tree);
-err_code_t add_node(my_tree_t *tree, tree_val_t data_to_add);
+
+char* give_op_type(node_t *node);
+char* give_var_type(node_t *node);
+char* give_num_type(node_t *node);
+char* get_data_field(node_t* node);
+const char* type_to_str(node_t* node);
 
 err_code_t paste_instruction();
 err_code_t tree_dump(my_tree_t* tree, node_t* curr_node DEBUG_INFO, const char * curr_action, ...);

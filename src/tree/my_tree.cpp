@@ -6,14 +6,12 @@
 #include <assert.h>
 #include "my_log.h"
 
-static node_t* add_node_by_root(my_tree_t* tree, node_t* curr_node, tree_val_t data_to_add);
-
-node_t* new_node(my_tree_t* tree, tree_val_t data, node_t* left_node, node_t* right_node)
+node_t* new_node(my_tree_t* tree, op_type_t type, tree_val_t data, node_t* left_node, node_t* right_node)
 {
     assert(tree);
 
     node_t* node = (node_t*) calloc(1, sizeof(node_t));
-
+    node->type  =       type;
     node->data  =       data;
     node->left  =  left_node;
     node->right = right_node;
@@ -24,7 +22,7 @@ node_t* new_node(my_tree_t* tree, tree_val_t data, node_t* left_node, node_t* ri
 err_code_t tree_ctor(my_tree_t* tree)
 {
     tree->size = 1;
-    tree->root = new_node(tree, 0, NULL, NULL);
+    tree->root = new_node(tree, 0, 0, NULL, NULL);
 
     return OK;
 }
@@ -44,52 +42,9 @@ err_code_t node_dtor(node_t* node)
     if (node->left  != NULL) node_dtor(node->left);
     if (node->right != NULL) node_dtor(node->right);
 
-    free(node->data);
     free(node);
 
     return OK;
-}
-
-err_code_t add_node(my_tree_t *tree, tree_val_t data_to_add)
-{
-    CHECK_TREE(tree);
-
-    node_t* appended_node = add_node_by_root(tree, tree->root, data_to_add);
-    tree->size += 1;
-
-    TREE_DUMP(tree, appended_node, "Added this node");
-
-    return OK;
-}
-
-static node_t* add_node_by_root(my_tree_t* tree, node_t* curr_node, tree_val_t data_to_add)
-{
-    if (curr_node == NULL) return new_node(tree, data_to_add, NULL, NULL);
-
-    TREE_DUMP(tree, curr_node,
-              "Comparing node.data = %d with data_to_add = %d", curr_node->data, data_to_add);
-
-    node_t*node_to_return = NULL;
-    if (curr_node->data < data_to_add)
-    {
-        node_to_return = add_node_by_root(tree, curr_node->right, data_to_add);
-        if (curr_node->right == NULL)
-        {
-            curr_node->right = node_to_return;
-            node_to_return->parent = curr_node;
-        }
-    }
-    else
-    {
-        node_to_return = add_node_by_root(tree, curr_node->left, data_to_add);
-        if (curr_node->left == NULL)
-        {
-            curr_node->left = node_to_return;
-            node_to_return->parent = curr_node;
-        }
-    }
-
-    return node_to_return;
 }
 
 err_code_t print_tree(my_tree_t* tree)
@@ -107,7 +62,7 @@ err_code_t print_node(node_t* tree)
 
     printf("(");
     if (tree->left  != NULL) print_node(tree->left);
-    printf("%s", tree->data);
+    printf("%lg", tree->data);
     if (tree->right != NULL) print_node(tree->right);
     printf(")");
 
