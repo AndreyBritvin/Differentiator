@@ -60,13 +60,36 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
 
     size_t len_of_expr = 0;
     tree_val_t expression = 0;
+    char funcname[MAX_STRING_SIZE] = {};
 
-    sscanf(buffer + *position, " %lf%ln", &expression, &len_of_expr);
+    printf("Type = %d ", sscanf(buffer + *position, "%[^(^)]%ln", &funcname, &len_of_expr));
+    printf("Get_funcname = %d\n", get_func_num(funcname));
+
+    op_type_t var_type = NUM;
+    if (sscanf(buffer + *position, "%lf%ln", &expression, &len_of_expr) > 0)
+    {
+        var_type = NUM;
+    }
+    else if (sscanf(buffer + *position, "%[^(^)]%ln", &funcname, &len_of_expr) >= 1
+             && get_func_num(funcname) != UNKNOWN)
+    {
+        var_type = OP;
+        expression = (tree_val_t) get_func_num(funcname);
+    }
+    else if (sscanf(buffer + *position, "%c%ln", &funcname, &len_of_expr))
+    {
+        var_type = VAR;
+        expression = (tree_val_t) funcname[0];
+    }
+    else
+    {
+        fprintf(stderr, "No sscanf dont work\n");
+    }
 
     *position += len_of_expr;
 
     tree->size++;
-    node_t* node_to_return = new_node(tree, 0, 0, NULL, NULL); // TODO: potential error via 0
+    node_t* node_to_return = new_node(tree, var_type, expression, NULL, NULL); // TODO: potential error via 0
     node_to_return->parent = parent;
     if (*position == 1)
     {
@@ -99,6 +122,22 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
     }
 
     return node_to_return;
+}
+
+int get_func_num(char* input)
+{
+    printf("%s\n", input);
+    printf("All_ops size = %d\n", sizeof(all_ops));
+
+    for (size_t i = 0; i < sizeof(all_ops) / sizeof(operation); i++)
+    {
+        if (!strcmp(all_ops[i].text, input))
+        {
+            return i;
+        }
+    }
+
+    return UNKNOWN;
 }
 
 #define LEFT node->left

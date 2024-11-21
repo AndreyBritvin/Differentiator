@@ -23,6 +23,7 @@ enum op_type
     CTH,
     TGH,
     CTG,
+    UNKNOWN
 };
 
 struct operation

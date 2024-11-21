@@ -21,4 +21,6 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node);
 err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output);
 err_code_t latex_output(my_tree_t* tree, const char* filename);
 
+int get_func_num(char* input);
+
 #endif // AKINATOR_H_
