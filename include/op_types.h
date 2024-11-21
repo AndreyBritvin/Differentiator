@@ -10,19 +10,19 @@ enum node_type
 
 enum op_type
 {
-    ADD,
-    SUB,
-    MUL,
-    DIV,
-    SIN,
-    COS,
-    EXP,
-    TAN,
-    SHN,
-    CHS,
-    CTH,
-    TGH,
-    CTG,
+    ADD =  0,
+    SUB =  1,
+    MUL =  2,
+    DIV =  3,
+    SIN =  4,
+    COS =  5,
+    EXP =  6,
+    TAN =  7,
+    SHN =  8,
+    CHS =  9,
+    CTH = 10,
+    TGH = 11,
+    CTG = 12,
     UNKNOWN
 };
 

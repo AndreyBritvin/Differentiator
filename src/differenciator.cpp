@@ -62,15 +62,15 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
     tree_val_t expression = 0;
     char funcname[MAX_STRING_SIZE] = {};
 
-    printf("Type = %d ", sscanf(buffer + *position, "%[^(^)]%ln", &funcname, &len_of_expr));
-    printf("Get_funcname = %d\n", get_func_num(funcname));
+    // printf("Type = %d ", sscanf(buffer + *position, "%[^()]%ln", &funcname, &len_of_expr));
+    // printf("Get_funcname = %d\n", get_func_num(funcname));
 
     op_type_t var_type = NUM;
     if (sscanf(buffer + *position, "%lf%ln", &expression, &len_of_expr) > 0)
     {
         var_type = NUM;
     }
-    else if (sscanf(buffer + *position, "%[^(^)]%ln", &funcname, &len_of_expr) >= 1
+    else if (sscanf(buffer + *position, "%[^()]%ln", &funcname, &len_of_expr) >= 1
              && get_func_num(funcname) != UNKNOWN)
     {
         var_type = OP;
@@ -126,8 +126,8 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
 
 int get_func_num(char* input)
 {
-    printf("%s\n", input);
-    printf("All_ops size = %d\n", sizeof(all_ops));
+    // printf("%s\n", input);
+    // printf("All_ops size = %d\n", sizeof(all_ops));
 
     for (size_t i = 0; i < sizeof(all_ops) / sizeof(operation); i++)
     {
@@ -158,6 +158,7 @@ tree_val_t evaluate_tree(node_t* node)
         case SUB: return SUB_(LEFT, RIGHT);
         case DIV: return DIV_(LEFT, RIGHT);
         case MUL: return MUL_(LEFT, RIGHT);
+        default: fprintf(stderr, "Unknown operation in evaluate\n"); return 0;
     }
 }
 #undef ADD_
@@ -179,7 +180,15 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
             case SUB: return diff_sub(doubled_tree, node);
             case MUL: return diff_mul(doubled_tree, node);
             case DIV: return diff_div(doubled_tree, node);
-
+            case SIN: return diff_sin(doubled_tree, node);
+            case COS: return diff_cos(doubled_tree, node);
+            case SHN: return diff_shn(doubled_tree, node);
+            case CHS: return diff_chs(doubled_tree, node);
+            // case TAN: return diff_sin(doubled_tree, node);
+            // case TGH: return diff_sin(doubled_tree, node);
+            // case CTG: return diff_sin(doubled_tree, node);
+            // case CTH: return diff_sin(doubled_tree, node);
+            case EXP: return diff_exp(doubled_tree, node);
             default : fprintf(stderr, "Unknown operator in differenciate\n"); return NULL;
         }
     }
@@ -237,9 +246,9 @@ err_code_t latex_output(my_tree_t* tree, const char* filename)
 
 #define UNAR_OUT(text, L)       fprintf(output, "\\");       \
                                 fprintf(output, text);      \
-                                fprintf(output, "{");       \
+                                fprintf(output, "{(");       \
                                 latex_node(tree, L, output);\
-                                fprintf(output, "}");
+                                fprintf(output, ")}");
 
 err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
 {
