@@ -16,6 +16,8 @@ node_t* new_node(my_tree_t* tree, op_type_t type, tree_val_t data, node_t* left_
     node->left  =  left_node;
     node->right = right_node;
 
+    tree->size += 1;
+
     return node;
 }
 

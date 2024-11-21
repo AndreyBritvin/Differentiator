@@ -214,7 +214,7 @@ char* get_data_field(node_t* node)
 char* give_var_type(node_t *node)
 {
     char* to_ret = (char *) calloc(13, sizeof(char));
-    sprintf(to_ret, "%c", node->data);
+    sprintf(to_ret, "%c", (char) node->data);
 
     return to_ret;
 }
