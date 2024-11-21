@@ -12,10 +12,11 @@ int main(const int argc, const char** argv)
 
     char *buffer = 0;
     fill_buffer(&buffer, "expressions/expr_1.txt");
-    // printf("%s\n", buffer);
+    printf("%s\n", buffer);
 
-    // my_tree_t expr_tree = make_tree(buffer);
-
+    my_tree_t expr_tree = make_tree(buffer);
+    TREE_DUMP(&expr_tree, expr_tree.root, "This is tree from chitalka");
+    tree_dtor(&expr_tree);
     // my_tree_t test_tree = {};
     INIT_TREE(test_tree);
     free(test_tree.root);
@@ -42,7 +43,8 @@ int main(const int argc, const char** argv)
     free(diff_tree.root);
     diff_tree.root = differenciate(&diff_tree, test_tree.root);
     TREE_DUMP(&diff_tree, diff_tree.root, "this is tree has size = %zu", diff_tree.size);
-    latex_node(&test_tree, test_tree.root, stdout);
+    latex_node(&diff_tree, diff_tree.root, stdout);
+
     tree_dtor(&test_tree);
     tree_dtor(&diff_tree);
 

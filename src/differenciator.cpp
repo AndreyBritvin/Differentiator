@@ -183,17 +183,23 @@ err_code_t latex_output(my_tree_t* tree, const char* filename)
 
 #define  INFIX_OUT(text, L, R)  fprintf(output, "(");\
                                 latex_node(tree, L, output);\
-                                fprintf(output, ")");\
                                 fprintf(output, text);\
-                                fprintf(output, "(");\
                                 latex_node(tree, R, output);\
                                 fprintf(output, ")");
+                                // fprintf(output, ")");
+                                // fprintf(output, "(");
 
 #define PREFIX_OUT(text, L, R)  fprintf(output, text);      \
                                 fprintf(output, "{");       \
                                 latex_node(tree, L, output);\
                                 fprintf(output, "}{");      \
                                 latex_node(tree, R, output);\
+                                fprintf(output, "}");
+
+#define UNAR_OUT(text, L)       fprintf(output, "\\");       \
+                                fprintf(output, text);      \
+                                fprintf(output, "{");       \
+                                latex_node(tree, L, output);\
                                 fprintf(output, "}");
 
 err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
@@ -210,6 +216,15 @@ err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
                 case SUB:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
                 case MUL:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
                 case DIV: PREFIX_OUT("\\frac", node->left, node->right); break;
+                case SIN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case COS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case TAN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case CTG:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case SHN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case CHS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case TGH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case CTH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+
                 default: fprintf(stderr, "unknow operator in latex node");break;
             }
             break;

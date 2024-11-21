@@ -57,6 +57,8 @@ node_t* diff_div(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_cos(my_tree_t* doubled_tree, node_t* node)
 {
+    // PARENT(sinus,  SIN_, );
+    // PARENT(to_ret, SUB_, NULL, (void*)NULL);
     node_t* to_ret = NULL;
 
     return to_ret;
