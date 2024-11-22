@@ -10,19 +10,28 @@ enum node_type
 
 enum op_type
 {
-    ADD =  0,
-    SUB =  1,
-    MUL =  2,
-    DIV =  3,
-    SIN =  4,
-    COS =  5,
-    EXP =  6,
-    TAN =  7,
-    SHN =  8,
-    CHS =  9,
-    CTH = 10,
-    TGH = 11,
-    CTG = 12,
+    ADD     =  0,
+    SUB     =  1,
+    MUL     =  2,
+    DIV     =  3,
+    SIN     =  4,
+    COS     =  5,
+    EXP     =  6,
+    TAN     =  7,
+    SHN     =  8,
+    CHS     =  9,
+    CTH     = 10,
+    TGH     = 11,
+    CTG     = 12,
+    LOG     = 13,
+    ARCSIN  = 14,
+    ARCCOS  = 15,
+    ARCTAN  = 16,
+    ARCCTG  = 17,
+    ARCSHN  = 18,
+    ARCCHS  = 19,
+    ARCTGH  = 20,
+    ARCCTH  = 21,
     UNKNOWN
 };
 
@@ -46,6 +55,15 @@ static operation all_ops[] = {//!!! order should be equal to enum!!!
     {CTH, "coth"},
     {TGH, "tanh"},
     {CTG, "cot"},
+    {LOG, "log"},
+    {ARCSIN, "arcsin"},
+    {ARCCOS, "arccos"},
+    {ARCTAN, "arctan"},
+    {ARCCTG, "arcctg"},
+    {ARCSHN, "arcshn"},
+    {ARCCHS, "arcchs"},
+    {ARCTGH, "arctgh"},
+    {ARCCTH, "arccth"},
 };
 
 #endif // OP_TYPES_H_

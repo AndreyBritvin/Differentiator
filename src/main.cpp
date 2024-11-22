@@ -25,13 +25,19 @@ int main(const int argc, const char** argv)
     diff_tree.root = differenciate(&diff_tree, expr_tree.root);
     TREE_DUMP(&diff_tree, diff_tree.root, "this is tree has size = %zu", diff_tree.size);
 
-    reduce_equation(&expr_tree);
+    // reduce_equation(&expr_tree);
     reduce_equation(&diff_tree);
+
+    printf("Latex of differrinciate equation:\n");
     latex_node(&diff_tree, diff_tree.root, stdout);
+    printf("\n");
+
+    printf("Latex of first equation:\n");
+    latex_node(&expr_tree, expr_tree.root, stdout);
+    printf("\n");
 
     tree_dtor(&expr_tree);
     tree_dtor(&diff_tree);
-    printf("\n");
     free(buffer);
     disable_logging();
 

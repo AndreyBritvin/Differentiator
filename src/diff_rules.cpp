@@ -68,7 +68,7 @@ node_t* diff_cos(my_tree_t* doubled_tree, node_t* node)
 {
     DL; CL;
     NUM_(-1, 1);
-    UNAR_PARENT(sinus, SIN_, left_copy);// TODO: add minus
+    UNAR_PARENT(sinus, SIN_, left_copy);
     PARENT(actual_sinus, MUL_, num1, sinus);
     PARENT(to_ret, MUL_, actual_sinus, left_diff);
 
@@ -147,7 +147,7 @@ node_t* diff_arccos(my_tree_t* doubled_tree, node_t* node)
     return to_ret;
 }
 
-node_t* diff_arctg(my_tree_t* doubled_tree, node_t* node)
+node_t* diff_arctan(my_tree_t* doubled_tree, node_t* node)
 {
     node_t* to_ret = NULL;
 
@@ -160,6 +160,36 @@ node_t* diff_arcctg(my_tree_t* doubled_tree, node_t* node)
 
     return to_ret;
 }
+
+
+node_t* diff_arcshn(my_tree_t* doubled_tree, node_t* node)
+{
+    node_t* to_ret = NULL;
+
+    return to_ret;
+}
+
+node_t* diff_arcchs(my_tree_t* doubled_tree, node_t* node)
+{
+    node_t* to_ret = NULL;
+
+    return to_ret;
+}
+
+node_t* diff_arctgh(my_tree_t* doubled_tree, node_t* node)
+{
+    node_t* to_ret = NULL;
+
+    return to_ret;
+}
+
+node_t* diff_arccth(my_tree_t* doubled_tree, node_t* node)
+{
+    node_t* to_ret = NULL;
+
+    return to_ret;
+}
+
 
 node_t* diff_exp(my_tree_t* doubled_tree, node_t* node)
 {
@@ -226,4 +256,11 @@ int subtree_var_count(my_tree_t* tree, node_t* node)
     if (node->right != NULL && subtree_var_count(tree, node->right) == ONE_VAR) return ONE_VAR;
 
     return ZERO_VAR;
+}
+
+node_t* diff_log(my_tree_t* doubled_tree, node_t* node)
+{
+    node_t* to_ret = NULL;
+
+    return to_ret;
 }
