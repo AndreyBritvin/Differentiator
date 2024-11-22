@@ -308,8 +308,17 @@ node_t* equivalent(my_tree_t* tree, node_t* node, bool* is_changed)
         tree_val_t new_value = evaluate_tree(node);
         to_ret = new_node(tree, NUM, new_value, NULL, NULL);
         to_ret->parent = node->parent;
-        // if (node->parent->right == node) node->parent->right = to_ret;
-        // if (node->parent->left  == node) node->parent->left  = to_ret;
+        node_dtor(node);
+
+        return to_ret;
+    }
+
+    if (node->type == OP && (int) node->data == MUL && (is_double_equal(node->right->data, 0)
+                                                     || is_double_equal(node->left->data, 0)))
+    {
+        *is_changed = true;
+        to_ret = new_node(tree, NUM, 0, NULL, NULL);
+        to_ret->parent = node->parent;
         node_dtor(node);
 
         return to_ret;
