@@ -290,9 +290,9 @@ err_code_t reduce_equation(my_tree_t* to_reduce)
     bool is_changed = true;
     while (is_changed)
     {
+        is_changed = false;
         equivalent(to_reduce, to_reduce->root, &is_changed);
         TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
-        is_changed = false;
     }
 
     return OK;
@@ -301,23 +301,38 @@ err_code_t reduce_equation(my_tree_t* to_reduce)
 node_t* equivalent(my_tree_t* tree, node_t* node, bool* is_changed)
 {
     node_t* to_ret = NULL;
-    if (subtree_var_count(tree, node) == ZERO_VAR)
+
+    // TREE_DUMP(tree, node, "we are here calculating this");
+    if (subtree_var_count(tree, node) == ZERO_VAR && node->type == OP)
     {
-        // TREE_DUMP(tree, node, "we are here calculating this");
         *is_changed = true;
         tree_val_t new_value = evaluate_tree(node);
         to_ret = new_node(tree, NUM, new_value, NULL, NULL);
         to_ret->parent = node->parent;
+        if (node == tree->root) tree->root = to_ret;
         node_dtor(node);
 
         return to_ret;
     }
 
     if (node->type == OP && (int) node->data == MUL && (is_double_equal(node->right->data, 0)
-                                                     || is_double_equal(node->left->data, 0)))
+                                                     || is_double_equal(node->left->data,  0)))
     {
         *is_changed = true;
         to_ret = new_node(tree, NUM, 0, NULL, NULL);
+        to_ret->parent = node->parent;
+        node_dtor(node);
+
+        return to_ret;
+    }
+
+    if (node->type == OP && (int) node->data == MUL && (is_double_equal(node->right->data, 1)
+                                                     || is_double_equal(node->left->data,  1)))
+    {
+        *is_changed = true;
+        if (is_double_equal(node->left->data,  1)) to_ret = copy_subtree(tree, node->right);
+        if (is_double_equal(node->right->data, 1)) to_ret = copy_subtree(tree, node->left);
+
         to_ret->parent = node->parent;
         node_dtor(node);
 
