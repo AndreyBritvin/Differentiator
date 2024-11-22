@@ -23,4 +23,7 @@ err_code_t latex_output(my_tree_t* tree, const char* filename);
 
 int get_func_num(char* input);
 
+err_code_t reduce_equation(my_tree_t* to_reduce);
+node_t* equivalent(my_tree_t* tree, node_t* node, bool* is_changed);
+
 #endif // AKINATOR_H_

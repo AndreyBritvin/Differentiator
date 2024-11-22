@@ -272,6 +272,7 @@ err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
                 case CHS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
                 case TGH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
                 case CTH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
+                case EXP:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
 
                 default: fprintf(stderr, "unknow operator in latex node");break;
             }
@@ -283,6 +284,43 @@ err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
 
     return OK;
 }
+
+err_code_t reduce_equation(my_tree_t* to_reduce)
+{
+    bool is_changed = true;
+    while (is_changed)
+    {
+        equivalent(to_reduce, to_reduce->root, &is_changed);
+        TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
+        is_changed = false;
+    }
+
+    return OK;
+}
+
+node_t* equivalent(my_tree_t* tree, node_t* node, bool* is_changed)
+{
+    node_t* to_ret = NULL;
+    if (subtree_var_count(tree, node) == ZERO_VAR)
+    {
+        // TREE_DUMP(tree, node, "we are here calculating this");
+        *is_changed = true;
+        tree_val_t new_value = evaluate_tree(node);
+        to_ret = new_node(tree, NUM, new_value, NULL, NULL);
+        to_ret->parent = node->parent;
+        // if (node->parent->right == node) node->parent->right = to_ret;
+        // if (node->parent->left  == node) node->parent->left  = to_ret;
+        node_dtor(node);
+
+        return to_ret;
+    }
+
+    if (node->right != NULL) node->right = equivalent(tree, node->right, is_changed);
+    if (node->left  != NULL) node->left  = equivalent(tree, node->left , is_changed);
+
+    return node;
+}
+
 // bool check_is_operator(input)
 // {
 //

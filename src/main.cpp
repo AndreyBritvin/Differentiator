@@ -24,6 +24,9 @@ int main(const int argc, const char** argv)
     free(diff_tree.root);
     diff_tree.root = differenciate(&diff_tree, expr_tree.root);
     TREE_DUMP(&diff_tree, diff_tree.root, "this is tree has size = %zu", diff_tree.size);
+
+    reduce_equation(&expr_tree);
+    reduce_equation(&diff_tree);
     latex_node(&diff_tree, diff_tree.root, stdout);
 
     tree_dtor(&expr_tree);
