@@ -91,3 +91,39 @@ err_code_t verificator(my_tree_t* tree, node_t* node, size_t recurs_level)
 
     return err_code;
 }
+
+node_t* copy_subtree(my_tree_t* main_tree, node_t* node)
+{
+    assert(main_tree);
+    assert(node);
+
+    node_t* copy_node = new_node(main_tree, node->type, node->data, NULL, NULL);
+
+    node_t* left_sub  = NULL;
+    node_t* right_sub = NULL;
+
+    if (node->left  != NULL)
+    {
+        left_sub  = copy_subtree(main_tree, node->left);
+        left_sub->parent = copy_node;
+    }
+    if (node->right != NULL)
+    {
+        right_sub = copy_subtree(main_tree, node->right);
+        right_sub->parent = copy_node;
+    }
+
+    copy_node->left  = left_sub;
+    copy_node->right = right_sub;
+
+    return copy_node;
+}
+
+int subtree_var_count(my_tree_t* tree, node_t* node)
+{
+    if (node->type == VAR) return ONE_VAR;
+    if (node->left  != NULL && subtree_var_count(tree, node->left)  == ONE_VAR) return ONE_VAR;
+    if (node->right != NULL && subtree_var_count(tree, node->right) == ONE_VAR) return ONE_VAR;
+
+    return ZERO_VAR;
+}

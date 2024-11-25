@@ -26,6 +26,13 @@
 
 typedef double tree_val_t;
 typedef int   op_type_t;
+
+enum vars_count
+{
+    ZERO_VAR,
+    ONE_VAR,
+};
+
 struct node_t
 {
     op_type_t   type;
@@ -61,6 +68,9 @@ char* give_var_type(node_t *node);
 char* give_num_type(node_t *node);
 char* get_data_field(node_t* node);
 const char* type_to_str(node_t* node);
+
+int subtree_var_count(my_tree_t* tree, node_t* node);
+node_t* copy_subtree(my_tree_t* main_tree, node_t* node);
 
 err_code_t paste_instruction();
 err_code_t tree_dump(my_tree_t* tree, node_t* curr_node DEBUG_INFO, const char * curr_action, ...);

@@ -158,7 +158,7 @@ int get_func_num(char* input)
 #define SHN_(L   ) sinh(evaluate_tree(L));
 #define CHS_(L   ) cosh(evaluate_tree(L));
 #define TGH_(L   ) tanh(evaluate_tree(L));
-#define CTH_(L   ) 1 / tanh(evaluate_tree(L));
+#define CTH_(L   ) tanh(1 / evaluate_tree(L));
 
 #define ARCSIN_(L   ) asin(evaluate_tree(L));
 #define ARCCOS_(L   ) acos(evaluate_tree(L));
@@ -168,7 +168,7 @@ int get_func_num(char* input)
 #define ARCSHN_(L   ) asinh(evaluate_tree(L));
 #define ARCCHS_(L   ) acosh(evaluate_tree(L));
 #define ARCTGH_(L   ) atanh(evaluate_tree(L));
-#define ARCCTH_(L   ) 1 / atanh(evaluate_tree(L));
+#define ARCCTH_(L   ) atanh(1 / evaluate_tree(L));
 
 tree_val_t evaluate_tree(node_t* node)
 {
@@ -216,18 +216,32 @@ tree_val_t evaluate_tree(node_t* node)
 #undef LEFT
 #undef RIGHT
 
+#define DO_DIFF(func) {node_t* result = diff_##func(doubled_tree, node); print_equation(doubled_tree, node, result); return result;}
 node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
 {
-    if (node->type == NUM) return new_node(doubled_tree, NUM, 0, NULL, NULL);
-    if (node->type == VAR) return new_node(doubled_tree, NUM, 1, NULL, NULL);
+    assert(doubled_tree);
+    assert(node);
+
+    if (node->type == NUM)
+    {
+        node_t* result = new_node(doubled_tree, NUM, 0, NULL, NULL);
+        print_equation(doubled_tree, node, result);
+        return result;
+    }
+    if (node->type == VAR)
+    {
+        node_t* result = new_node(doubled_tree, NUM, 1, NULL, NULL);
+        print_equation(doubled_tree, node, result);
+        return result;
+    }
     if (node->type == OP)
     {
         switch ((int) node->data)
         {
-            case ADD: return diff_add(doubled_tree, node);
-            case SUB: return diff_sub(doubled_tree, node);
-            case MUL: return diff_mul(doubled_tree, node);
-            case DIV: return diff_div(doubled_tree, node);
+            case ADD: DO_DIFF(add);
+            case SUB: DO_DIFF(sub);
+            case MUL: DO_DIFF(mul);
+            case DIV: DO_DIFF(div);
 
             case SIN: return diff_sin(doubled_tree, node);
             case COS: return diff_cos(doubled_tree, node);
@@ -257,174 +271,128 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
     }
 }
 
-node_t* copy_subtree(my_tree_t* main_tree, node_t* node)
-{
-    node_t* copy_node = new_node(main_tree, node->type, node->data, NULL, NULL);
-
-    node_t* left_sub  = NULL;
-    node_t* right_sub = NULL;
-
-    if (node->left  != NULL)
-    {
-        left_sub  = copy_subtree(main_tree, node->left);
-        left_sub->parent = copy_node;
-    }
-    if (node->right != NULL)
-    {
-        right_sub = copy_subtree(main_tree, node->right);
-        right_sub->parent = copy_node;
-    }
-
-    copy_node->left  = left_sub;
-    copy_node->right = right_sub;
-
-    return copy_node;
-}
-
-err_code_t latex_output(my_tree_t* tree, const char* filename)
-{
-    FILE* SAFE_OPEN_FILE(output_file, filename, "a");
-
-    latex_node(tree, tree->root, output_file);
-
-    fclose(output_file);
-
-    return OK;
-}
-
-#define  INFIX_OUT(text, L, R)  fprintf(output, "(");\
-                                latex_node(tree, L, output);\
-                                fprintf(output, text);\
-                                latex_node(tree, R, output);\
-                                fprintf(output, ")");
-                                // fprintf(output, ")");
-                                // fprintf(output, "(");
-
-#define PREFIX_OUT(text, L, R)  fprintf(output, text);      \
-                                fprintf(output, "{");       \
-                                latex_node(tree, L, output);\
-                                fprintf(output, "}{");      \
-                                latex_node(tree, R, output);\
-                                fprintf(output, "}");
-
-#define UNAR_OUT(text, L)       fprintf(output, "\\");       \
-                                fprintf(output, text);      \
-                                fprintf(output, "{(");       \
-                                latex_node(tree, L, output);\
-                                fprintf(output, ")}");
-
-err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
-{
-    switch (node->type)
-    {
-        case NUM: fprintf(output, "%lg", node->data); break;
-        case VAR: fprintf(output, "%c",  (char) node->data); break;
-        case OP:
-        {
-            switch ((int) node->data)
-            {
-                case ADD:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
-                case SUB:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
-                case MUL:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
-                case DIV: PREFIX_OUT("\\frac", node->left, node->right); break;
-
-                case SIN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case COS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case TAN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case CTG:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-
-                case SHN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case CHS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case TGH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case CTH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-
-                case EXP:  INFIX_OUT(all_ops[(int) node->data].text, node->left, node->right); break;
-                case LOG:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-
-                case ARCSIN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case ARCCOS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case ARCCTG:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case ARCTAN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-
-                case ARCSHN:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case ARCCHS:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case ARCTGH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-                case ARCCTH:   UNAR_OUT(all_ops[(int) node->data].text, node->left); break;
-
-                default: fprintf(stderr, "unknow operator in latex node");break;
-            }
-            break;
-        }
-        default:
-            fprintf(stderr, "unknown operation in latex_node"); break;
-    }
-
-    return OK;
-}
-
 err_code_t reduce_equation(my_tree_t* to_reduce)
 {
+    assert(to_reduce);
+
     bool is_changed = true;
     while (is_changed)
     {
         is_changed = false;
-        equivalent(to_reduce, to_reduce->root, &is_changed);
+        simplify_tree(to_reduce, to_reduce->root, &is_changed);
         TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
     }
 
     return OK;
 }
 
-node_t* equivalent(my_tree_t* tree, node_t* node, bool* is_changed)
+node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
 {
-    node_t* to_ret = NULL;
+    assert(tree);
+    assert(node);
+    assert(is_changed);
+
+    if (node->right != NULL) node->right = simplify_tree(tree, node->right, is_changed);
+    if (node->left  != NULL) node->left  = simplify_tree(tree, node->left , is_changed);
 
     if (subtree_var_count(tree, node) == ZERO_VAR && node->type == OP)
     {
-        TREE_DUMP(tree, node, "we are here calculating this");
-        *is_changed = true;
-        tree_val_t new_value = evaluate_tree(node);
-        to_ret = new_node(tree, NUM, new_value, NULL, NULL);
-        to_ret->parent = node->parent;
-        if (node == tree->root) tree->root = to_ret;
-        node_dtor(node);
-
-        return to_ret;
+        return constant_folding(tree, node, is_changed);
     }
 
     if (node->type == OP && (int) node->data == MUL
         && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
           || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
     {
-        *is_changed = true;
-        TREE_DUMP(tree, node, "gonna changing this to null this");
-        to_ret = new_node(tree, NUM, 0, NULL, NULL);
-        to_ret->parent = node->parent;
-        node_dtor(node);
-
-        return to_ret;
+        return  mul_0_folding(tree, node, is_changed);
     }
 
     if (node->type == OP && (int) node->data == MUL && (is_double_equal(node->right->data, 1)
                                                      || is_double_equal(node->left->data,  1)))
     {
-        *is_changed = true;
-        if (is_double_equal(node->left->data,  1)) to_ret = copy_subtree(tree, node->right);
-        if (is_double_equal(node->right->data, 1)) to_ret = copy_subtree(tree, node->left);
-
-        to_ret->parent = node->parent;
-        node_dtor(node);
-
-        return to_ret;
+        return mul_1_folding(tree, node, is_changed);
     }
 
-    if (node->right != NULL) node->right = equivalent(tree, node->right, is_changed);
-    if (node->left  != NULL) node->left  = equivalent(tree, node->left , is_changed);
+    if (node->type == OP && (int) node->data == EXP && (is_double_equal(node->right->data, 1)
+                                                     || is_double_equal(node->left->data,  1)))
+    {
+        return mul_1_folding(tree, node, is_changed); // not error that mul; same as * 1 == ^ 1
+    }
+
+    if (node->type == OP && (int) node->data == EXP && (is_double_equal(node->right->data, 0)
+                                                     || is_double_equal(node->left->data,  0)))
+    {
+        return pow_0_folding(tree, node, is_changed);
+    }
+
 
     return node;
 }
 
-// bool check_is_operator(input)
-// {
-//
-// }
+node_t* constant_folding(my_tree_t* tree, node_t* node, bool* is_changed)
+{
+    assert(tree);
+    assert(node);
+    assert(is_changed);
+
+    node_t* to_ret = NULL;
+    TREE_DUMP(tree, node, "we are here calculating this");
+    *is_changed = true;
+    tree_val_t new_value = evaluate_tree(node);
+    to_ret = new_node(tree, NUM, new_value, NULL, NULL);
+    to_ret->parent = node->parent;
+
+    if (node == tree->root) tree->root = to_ret;
+    node_dtor(node);
+
+    return to_ret;
+}
+
+node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed)
+{
+    assert(tree);
+    assert(node);
+    assert(is_changed);
+
+    node_t* to_ret = NULL;
+    *is_changed = true;
+    if (is_double_equal(node->left->data,  1)) to_ret = copy_subtree(tree, node->right);
+    if (is_double_equal(node->right->data, 1)) to_ret = copy_subtree(tree, node->left);
+
+    to_ret->parent = node->parent;
+    node_dtor(node);
+
+    return to_ret;
+}
+
+node_t* mul_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
+{
+    assert(tree);
+    assert(node);
+    assert(is_changed);
+
+    node_t* to_ret = NULL;
+    *is_changed = true;
+    TREE_DUMP(tree, node, "gonna changing this to zero this");
+    to_ret = new_node(tree, NUM, 0, NULL, NULL);
+
+    to_ret->parent = node->parent;
+    node_dtor(node);
+
+    return to_ret;
+}
+
+node_t* pow_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
+{
+    assert(tree);
+    assert(node);
+    assert(is_changed);
+
+    node_t* to_ret = NULL;
+    *is_changed = true;
+    to_ret = new_node(tree, NUM, 1, NULL, NULL);
+    to_ret->parent = node->parent;
+    node_dtor(node);
+
+    return to_ret;
+}

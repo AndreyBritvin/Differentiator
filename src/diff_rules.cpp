@@ -249,15 +249,6 @@ node_t* diff_exponential(my_tree_t* doubled_tree, node_t* node)
     return to_ret;
 }
 
-int subtree_var_count(my_tree_t* tree, node_t* node)
-{
-    if (node->type == VAR) return ONE_VAR;
-    if (node->left  != NULL && subtree_var_count(tree, node->left)  == ONE_VAR) return ONE_VAR;
-    if (node->right != NULL && subtree_var_count(tree, node->right) == ONE_VAR) return ONE_VAR;
-
-    return ZERO_VAR;
-}
-
 node_t* diff_log(my_tree_t* doubled_tree, node_t* node)
 {
     node_t* to_ret = NULL;

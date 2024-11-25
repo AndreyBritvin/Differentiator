@@ -9,6 +9,8 @@
 int main(const int argc, const char** argv)
 {
     enable_logging("tree_dump/differenciator.html");
+    enable_latex_output("tree_dump/latex.tex", "expressions/differenciate_obvious.txt");
+    print_introduction();
 
     char *buffer = 0;
     fill_buffer(&buffer, "expressions/expr_1.txt");
@@ -29,6 +31,7 @@ int main(const int argc, const char** argv)
     reduce_equation(&diff_tree);
 
     printf("Latex of differrinciate equation:\n");
+    print_equation(&diff_tree, expr_tree.root, diff_tree.root);
     latex_node(&diff_tree, diff_tree.root, stdout);
     printf("\n");
 
@@ -36,9 +39,13 @@ int main(const int argc, const char** argv)
     latex_node(&expr_tree, expr_tree.root, stdout);
     printf("\n");
 
+    print_ending();
+
     tree_dtor(&expr_tree);
     tree_dtor(&diff_tree);
     free(buffer);
+
+    disable_latex_output();
     disable_logging();
 
     return OK;
