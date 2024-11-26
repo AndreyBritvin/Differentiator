@@ -12,31 +12,44 @@ static size_t lines_num = 0;
 #define LATEX(...) if (LATEX_FILE != NULL) fprintf(LATEX_FILE, __VA_ARGS__);
 
 #define  INFIX_OUT(text, L, R)  fprintf(output, "(");\
-                                latex_node(tree, L, output);\
+                                latex_node(tree, L, output, is_graph_mode);\
                                 fprintf(output, text);\
-                                latex_node(tree, R, output);\
+                                latex_node(tree, R, output, is_graph_mode);\
                                 fprintf(output, ")");
                                 // fprintf(output, ")");
                                 // fprintf(output, "(");
 
-#define PREFIX_OUT(text, L, R)  fprintf(output, text);      \
-                                fprintf(output, "{");       \
-                                latex_node(tree, L, output);\
-                                fprintf(output, "}{");      \
-                                latex_node(tree, R, output);\
-                                fprintf(output, "}");
+#define PREFIX_OUT(text, L, R)  if (is_graph_mode)                              \
+                                {                                               \
+                                    fprintf(output, "(");                       \
+                                    latex_node(tree, L, output, is_graph_mode); \
+                                    fprintf(output, ")");                      \
+                                    fprintf(output, "/");                      \
+                                    fprintf(output, "(");                       \
+                                    latex_node(tree, R, output, is_graph_mode); \
+                                    fprintf(output, ")");                       \
+                                }                                               \
+                                else                                            \
+                                {                                               \
+                                    fprintf(output, text);                      \
+                                    fprintf(output, "{");                       \
+                                    latex_node(tree, L, output, is_graph_mode); \
+                                    fprintf(output, "}{");                      \
+                                    latex_node(tree, R, output, is_graph_mode); \
+                                    fprintf(output, "}");                       \
+                                }
 
-#define UNAR_OUT(text, L)       fprintf(output, "\\");       \
-                                fprintf(output, text);      \
-                                fprintf(output, "{(");       \
-                                latex_node(tree, L, output);\
-                                fprintf(output, ")}");
+#define UNAR_OUT(text, L)       if (!is_graph_mode) fprintf(output, "\\");       \
+                                fprintf(output, text);                          \
+                                fprintf(output, "(");                          \
+                                latex_node(tree, L, output, is_graph_mode);     \
+                                fprintf(output, ")");
 
 #define TYPE_NAME all_ops[(int) node->data].text
 #define LEFT      node->left
 #define RIGHT     node->right
 
-err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output)
+err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output, bool is_graph_mode)
 {
     assert(tree);
     assert(output);
@@ -193,9 +206,9 @@ err_code_t print_equation(my_tree_t* tree, node_t* node_before, node_t* node_aft
 {
     LATEX("%s"
           "\\[(", all_jokes[rand() % lines_num]);
-    latex_node(tree, node_before, LATEX_FILE);
+    latex_node(tree, node_before, LATEX_FILE, 0);
     LATEX(")' = ");
-    latex_node(tree, node_after, LATEX_FILE);
+    latex_node(tree, node_after, LATEX_FILE, 0);
     LATEX("\\]\n");
 
     return OK;
@@ -206,14 +219,24 @@ err_code_t paste_graph(my_tree_t* tree, node_t* node)
     LATEX(
     "\\begin{tikzpicture}\n"
     "\\begin{axis}\n"
-    "\\addplot[color=red]{"
+    "\\addplot[color=red, samples=200]{"
         );
-    latex_node(tree, node, LATEX_FILE);
+    latex_node(tree, node, LATEX_FILE, 1);
     LATEX(
     "};\n"
     "\\end{axis}\n"
     "\\end{tikzpicture}\n"
         );
+
+    return OK;
+}
+
+err_code_t paste_taylor(my_tree_t* tree, node_t* node)
+{
+    LATEX("Вот тейлорово разложение. После контрольной в самый раз\n"
+          "\\[");
+    latex_node(tree, node, LATEX_FILE, 0);
+    LATEX("\\]\n");
 
     return OK;
 }

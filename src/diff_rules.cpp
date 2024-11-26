@@ -19,6 +19,7 @@
 #define SHN_(L   ) new_node(doubled_tree, OP, SHN, L, NULL)
 #define CHS_(L   ) new_node(doubled_tree, OP, CHS, L, NULL)
 #define EXP_(L, R) new_node(doubled_tree, OP, EXP, L, R)
+#define LOG_(L, R) new_node(doubled_tree, OP, LOG, L, R)
 
 
 #define      PARENT(var_name, macro, L, R) node_t* var_name = macro(L, R); R->parent = L->parent = var_name;
@@ -251,7 +252,9 @@ node_t* diff_exponential(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_log(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+
+    PARENT(to_ret, DIV_, left_diff, left_copy);
 
     return to_ret;
 }

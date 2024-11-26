@@ -55,7 +55,7 @@ static operation all_ops[] = {//!!! order should be equal to enum!!!
     {CTH, "coth"},
     {TGH, "tanh"},
     {CTG, "cot"},
-    {LOG, "log"},
+    {LOG, "ln"},
     {ARCSIN, "arcsin"},
     {ARCCOS, "arccos"},
     {ARCTAN, "arctan"},

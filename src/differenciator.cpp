@@ -148,7 +148,7 @@ int get_func_num(char* input)
 #define MUL_(L, R) evaluate_tree(L) * evaluate_tree(R);
 
 #define EXP_(L, R) pow(evaluate_tree(L), evaluate_tree(R));
-#define LOG_(L, R) log(evaluate_tree(R)) / log (evaluate_tree(L));
+#define LOG_(L   ) log(evaluate_tree(L));
 
 #define SIN_(L   ) sin(evaluate_tree(L));
 #define COS_(L   ) cos(evaluate_tree(L));
@@ -193,7 +193,7 @@ tree_val_t evaluate_tree(node_t* node)
         case CTH: return CTH_(LEFT);
 
         case EXP: return EXP_(LEFT, RIGHT);
-        case LOG: return LOG_(LEFT, RIGHT);
+        case LOG: return LOG_(LEFT);
 
         case ARCSIN: return ARCSIN_(LEFT);
         case ARCCOS: return ARCCOS_(LEFT);
@@ -261,7 +261,7 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
             // case CTH: return diff_sin(doubled_tree, node);
 
             case EXP: return diff_exp(doubled_tree, node);
-            // case LOG: return diff_log(doubled_tree, node);
+            case LOG: return diff_log(doubled_tree, node);
 
             // case ARCSIN: return diff_arcsin(doubled_tree, node);
             // case ARCCOS: return diff_arccos(doubled_tree, node);
@@ -322,7 +322,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
           || node->left->type  == NUM && is_double_equal(node->left->data,  1)))
     {
         TREE_DUMP(tree, node, "something will happened mul1");
-        return mul_1_folding(tree, node, is_changed);
+        return mul_1_folding(tree, node, is_changed, 1);
     }
 
     if (node->type == OP && (int) node->data == EXP
@@ -330,7 +330,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
           || node->left->type  == NUM && is_double_equal(node->left->data,  1)))
     {
         TREE_DUMP(tree, node, "something will happened exp1");
-        return mul_1_folding(tree, node, is_changed); // not error that mul; same as * 1 == ^ 1
+        return mul_1_folding(tree, node, is_changed, 1); // not error that mul; same as * 1 == ^ 1
     }
 
     if (node->type == OP && (int) node->data == EXP
@@ -339,6 +339,14 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
     {
         TREE_DUMP(tree, node, "something will happened exp0");
         return pow_0_folding(tree, node, is_changed);
+    }
+
+    if (node->type == OP && ((int) node->data == ADD || (int) node->data == SUB)
+        && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
+          || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
+    {
+        TREE_DUMP(tree, node, "something will happened +-0");
+        return mul_1_folding(tree, node, is_changed, 0);
     }
 
 
@@ -364,7 +372,7 @@ node_t* constant_folding(my_tree_t* tree, node_t* node, bool* is_changed)
     return to_ret;
 }
 
-node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed)
+node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed, tree_val_t num_to_cmp)
 {
     assert(tree);
     assert(node);
@@ -372,8 +380,8 @@ node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed)
 
     node_t* to_ret = NULL;
     *is_changed = true;
-    if (is_double_equal(node->left->data,  1)) to_ret = copy_subtree(tree, node->right);
-    if (is_double_equal(node->right->data, 1)) to_ret = copy_subtree(tree, node->left);
+    if (is_double_equal(node->left->data,  num_to_cmp)) to_ret = copy_subtree(tree, node->right);
+    if (is_double_equal(node->right->data, num_to_cmp)) to_ret = copy_subtree(tree, node->left);
 
     to_ret->parent = node->parent;
     node_dtor(node);
