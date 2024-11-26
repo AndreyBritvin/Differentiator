@@ -167,7 +167,10 @@ err_code_t disable_latex_output()
 err_code_t print_introduction()
 {
     LATEX("\\documentclass{article}\n"
-    "\\usepackage[T2A]{fontenc}"
+    "\\usepackage[T2A]{fontenc}\n"
+    "\\usepackage[margin=0.25in]{geometry}\n"
+    "\\usepackage{pgfplots}\n"
+    "\\pgfplotsset{width=10cm,compat=1.9}\n\n"
     "\\title{Test}\n"
     "\\author{Andrey Britvin}\n"
     "\\date{November 2024}\n"
@@ -194,6 +197,23 @@ err_code_t print_equation(my_tree_t* tree, node_t* node_before, node_t* node_aft
     LATEX(")' = ");
     latex_node(tree, node_after, LATEX_FILE);
     LATEX("\\]\n");
+
+    return OK;
+}
+
+err_code_t paste_graph(my_tree_t* tree, node_t* node)
+{
+    LATEX(
+    "\\begin{tikzpicture}\n"
+    "\\begin{axis}\n"
+    "\\addplot[color=red]{"
+        );
+    latex_node(tree, node, LATEX_FILE);
+    LATEX(
+    "};\n"
+    "\\end{axis}\n"
+    "\\end{tikzpicture}\n"
+        );
 
     return OK;
 }

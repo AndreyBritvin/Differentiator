@@ -38,9 +38,13 @@ int main(const int argc, const char** argv)
     printf("Latex of first equation:\n");
     latex_node(&expr_tree, expr_tree.root, stdout);
     printf("\n");
+    paste_graph(&expr_tree, expr_tree.root);
+    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0, 3);
+    TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
 
     print_ending();
 
+    tree_dtor(&taylor_tree);
     tree_dtor(&expr_tree);
     tree_dtor(&diff_tree);
     free(buffer);

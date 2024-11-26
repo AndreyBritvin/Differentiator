@@ -213,10 +213,17 @@ tree_val_t evaluate_tree(node_t* node)
 #undef SUB_
 #undef DIV_
 #undef MUL_
+#undef EXP_
 #undef LEFT
 #undef RIGHT
 
-#define DO_DIFF(func) {node_t* result = diff_##func(doubled_tree, node); print_equation(doubled_tree, node, result); return result;}
+#define DO_DIFF(func)                                   \
+{                                                       \
+    node_t* result = diff_##func(doubled_tree, node);   \
+    print_equation(doubled_tree, node, result);         \
+    return result;                                      \
+}
+
 node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
 {
     assert(doubled_tree);
@@ -271,6 +278,7 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
     }
 }
 
+//TODO: move this to new file
 err_code_t reduce_equation(my_tree_t* to_reduce)
 {
     assert(to_reduce);
@@ -279,7 +287,8 @@ err_code_t reduce_equation(my_tree_t* to_reduce)
     while (is_changed)
     {
         is_changed = false;
-        simplify_tree(to_reduce, to_reduce->root, &is_changed);
+        TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
+        to_reduce->root = simplify_tree(to_reduce, to_reduce->root, &is_changed);
         TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
     }
 
@@ -304,24 +313,31 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
         && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
           || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
     {
+        TREE_DUMP(tree, node, "something will happened mul0");
         return  mul_0_folding(tree, node, is_changed);
     }
 
-    if (node->type == OP && (int) node->data == MUL && (is_double_equal(node->right->data, 1)
-                                                     || is_double_equal(node->left->data,  1)))
+    if (node->type == OP && (int) node->data == MUL
+        && ( node->right->type == NUM && is_double_equal(node->right->data, 1)
+          || node->left->type  == NUM && is_double_equal(node->left->data,  1)))
     {
+        TREE_DUMP(tree, node, "something will happened mul1");
         return mul_1_folding(tree, node, is_changed);
     }
 
-    if (node->type == OP && (int) node->data == EXP && (is_double_equal(node->right->data, 1)
-                                                     || is_double_equal(node->left->data,  1)))
+    if (node->type == OP && (int) node->data == EXP
+        && ( node->right->type == NUM && is_double_equal(node->right->data, 1)
+          || node->left->type  == NUM && is_double_equal(node->left->data,  1)))
     {
+        TREE_DUMP(tree, node, "something will happened exp1");
         return mul_1_folding(tree, node, is_changed); // not error that mul; same as * 1 == ^ 1
     }
 
-    if (node->type == OP && (int) node->data == EXP && (is_double_equal(node->right->data, 0)
-                                                     || is_double_equal(node->left->data,  0)))
+    if (node->type == OP && (int) node->data == EXP
+        && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
+          || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
     {
+        TREE_DUMP(tree, node, "something will happened exp0");
         return pow_0_folding(tree, node, is_changed);
     }
 
@@ -395,4 +411,92 @@ node_t* pow_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
     node_dtor(node);
 
     return to_ret;
+}
+
+my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
+{
+    INIT_TREE(taylor_tree);
+    free(taylor_tree.root);
+    taylor_tree.root = NULL;
+    Global_X = x0;
+    INIT_TREE(diff_subtree);
+    free(diff_subtree.root);
+    diff_subtree.root = copy_subtree(expr_tree, expr_tree->root);
+
+    for (size_t i = 0; i < amount; i++)
+    {
+        INIT_TREE(diff_tree);
+        free(diff_tree.root);
+        diff_tree.root = differenciate(&diff_tree, diff_subtree.root);
+        reduce_equation(&diff_tree);
+
+        tree_val_t deriative_n = evaluate_tree(diff_tree.root);
+        tree_val_t coef_n = deriative_n / factorial(i + 1);
+        printf("i = %zu, n = %lg\n", i, coef_n);
+        add_taylor_coeff(&taylor_tree, x0, i, coef_n);
+
+        tree_dtor(&diff_subtree);
+        diff_subtree.root = diff_tree.root;
+    }
+    TREE_DUMP(&taylor_tree, taylor_tree.root, "before reducing");
+
+    reduce_equation(&taylor_tree);
+    tree_dtor(&diff_subtree);
+
+    return taylor_tree;
+}
+
+#define NUM_(nums, num_of_num) node_t* num_##num_of_num = new_node(taylor_tree, NUM, nums, NULL, NULL);
+#define VAR_(var) node_t* var_node = new_node(taylor_tree, VAR, var, NULL, NULL);
+#define ADD_(L, R) new_node(taylor_tree, OP, ADD, L, R)
+#define SUB_(L, R) new_node(taylor_tree, OP, SUB, L, R)
+#define MUL_(L, R) new_node(taylor_tree, OP, MUL, L, R)
+#define EXP_(L, R) new_node(taylor_tree, OP, EXP, L, R)
+#define PARENT(var_name, macro, L, R) node_t* var_name = macro(L, R); R->parent = L->parent = var_name;
+
+err_code_t add_taylor_coeff(my_tree_t* taylor_tree, tree_val_t x0, size_t power, tree_val_t coef)
+{
+    NUM_(x0, x1);
+    NUM_(power, power1);
+    NUM_(coef, coef);
+    NUM_(0, empty);
+    VAR_('x');
+    PARENT(minus1, SUB_, var_node, num_x1);
+    PARENT(power1, EXP_, minus1, num_power1);
+    PARENT(mul1,   MUL_, power1, num_coef);
+    PARENT(add1, ADD_, mul1, num_empty);
+    if (taylor_tree->root != NULL)
+    {
+        node_t* zero_node = find_zero_node(taylor_tree, taylor_tree->root);
+        printf("coef = %lg, node = %p\n", coef, zero_node);
+        zero_node->parent->right = add1;
+        add1->parent = zero_node->parent;
+        free(zero_node);
+    }
+    else
+    {
+        taylor_tree->root = add1;
+    }
+    TREE_DUMP(taylor_tree, add1, "added this");
+
+    return OK;
+}
+
+node_t* find_zero_node(my_tree_t* taylor_tree, node_t* curr_node)
+{
+    if (curr_node->type == NUM) return curr_node;
+
+    return find_zero_node(taylor_tree, curr_node->right);
+}
+
+unsigned long long factorial(size_t num)
+{
+    unsigned long long fact = 1;
+
+    for (size_t i = 1; i < num; i++)
+    {
+        fact *= i;
+    }
+
+    return fact;
 }
