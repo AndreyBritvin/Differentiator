@@ -1,5 +1,6 @@
 #include "diff_rules.h"
 #include "differenciator.h"
+#include "latex_output.h"
 #include "math.h"
 
 #define NUM_(nums, num_of_num) node_t* num##num_of_num = new_node(doubled_tree, NUM, nums, NULL, NULL);
@@ -19,7 +20,7 @@
 #define SHN_(L   ) new_node(doubled_tree, OP, SHN, L, NULL)
 #define CHS_(L   ) new_node(doubled_tree, OP, CHS, L, NULL)
 #define EXP_(L, R) new_node(doubled_tree, OP, EXP, L, R)
-#define LOG_(L, R) new_node(doubled_tree, OP, LOG, L, R)
+#define LOG_(L   ) new_node(doubled_tree, OP, LOG, L, NULL)
 
 
 #define      PARENT(var_name, macro, L, R) node_t* var_name = macro(L, R); R->parent = L->parent = var_name;
@@ -27,7 +28,11 @@
 
 node_t* diff_add(my_tree_t* doubled_tree, node_t* node)
 {
-    DL; DR;
+    DL; DR; //CLN(for_dump); CRN(for_dump);
+    // PARENT(original_node, ADD_, left_copyfor_dump, right_copyfor_dump);
+
+    // print_equation_begining(doubled_tree, original_node, "Сумма раскладывается так:");
+
     PARENT(to_ret, ADD_, left_diff, right_diff);
 
     return to_ret;
@@ -53,12 +58,13 @@ node_t* diff_mul(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_div(my_tree_t* doubled_tree, node_t* node)
 {
-    DL; DR; CRN(1); CRN(2); CRN(3); CL;
+    DL; DR; CRN(1); CRN(2); CL;//CRN(3);
 
     PARENT(mul_1, MUL_, left_diff, right_copy1);
     PARENT(mul_2, MUL_, right_diff, left_copy);
     PARENT(chisl, SUB_, mul_1, mul_2);
-    PARENT(znam_sq, MUL_, right_copy2, right_copy3);
+    NUM_(2, square);
+    PARENT(znam_sq, EXP_, right_copy2, numsquare);
 
     PARENT(to_ret, DIV_, chisl, znam_sq);
 
@@ -108,7 +114,11 @@ node_t* diff_chs(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_tan(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power)
+    UNAR_PARENT(secans, COS_, left_copy);
+    PARENT(secans_square, EXP_, secans, numpower);
+    PARENT(to_ret, DIV_, left_diff, secans_square);
 
     return to_ret;
 }
@@ -122,7 +132,13 @@ node_t* diff_tgh(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_ctg(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power);
+    NUM_(-1, negative);
+    UNAR_PARENT(secans, SIN_, left_copy);
+    PARENT(secans_square, EXP_, secans, numpower);
+    PARENT(almost_answer, DIV_, left_diff, secans_square);
+    PARENT(to_ret, MUL_, numnegative, almost_answer);
 
     return to_ret;
 }
@@ -233,7 +249,17 @@ node_t* diff_pow(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_pow_exp(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; DR; CRN(1); CRN(2); CLN(1); CLN(2); CLN(3);
+    PARENT(original, EXP_, left_copy1, right_copy1);
+
+    UNAR_PARENT(logarithm, LOG_, left_copy2);
+    PARENT(second_add, MUL_, logarithm, right_diff);
+
+    PARENT(division, DIV_, right_copy2, left_copy3);
+    PARENT(first_add, MUL_, division, left_diff);
+
+    PARENT(second_diff, ADD_, first_add, second_add);
+    PARENT(to_ret, MUL_, original, second_diff);
 
     return to_ret;
 }

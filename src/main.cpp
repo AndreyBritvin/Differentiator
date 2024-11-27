@@ -32,15 +32,15 @@ int main(const int argc, const char** argv)
 
     printf("Latex of differrinciate equation:\n");
     print_equation(&diff_tree, expr_tree.root, diff_tree.root);
-    latex_node(&diff_tree, diff_tree.root, stdout, 0);
+    latex_node(&diff_tree, diff_tree.root, stdout, FORMULA_MODE);
     printf("\n");
 
     printf("Latex of first equation:\n");
-    latex_node(&expr_tree, expr_tree.root, stdout, 0);
+    latex_node(&expr_tree, expr_tree.root, stdout, FORMULA_MODE);
     printf("\n");
     paste_graph(&expr_tree, expr_tree.root);
 
-    // my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 1);
+    // my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 3);
     // TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
     // paste_taylor(&taylor_tree, taylor_tree.root);
 

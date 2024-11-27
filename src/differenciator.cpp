@@ -252,13 +252,13 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
 
             case SIN: return diff_sin(doubled_tree, node);
             case COS: return diff_cos(doubled_tree, node);
-            // case TAN: return diff_sin(doubled_tree, node);
-            // case CTG: return diff_sin(doubled_tree, node);
+            case TAN: return diff_tan(doubled_tree, node);
+            case CTG: return diff_ctg(doubled_tree, node);
 
             case SHN: return diff_shn(doubled_tree, node);
             case CHS: return diff_chs(doubled_tree, node);
-            // case TGH: return diff_sin(doubled_tree, node);
-            // case CTH: return diff_sin(doubled_tree, node);
+            // case TGH: return diff_tgh(doubled_tree, node);
+            // case CTH: return diff_cth(doubled_tree, node);
 
             case EXP: return diff_exp(doubled_tree, node);
             case LOG: return diff_log(doubled_tree, node);
@@ -287,9 +287,9 @@ err_code_t reduce_equation(my_tree_t* to_reduce)
     while (is_changed)
     {
         is_changed = false;
-        TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
+        // TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
         to_reduce->root = simplify_tree(to_reduce, to_reduce->root, &is_changed);
-        TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
+        // TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
     }
 
     return OK;
@@ -313,7 +313,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
         && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
           || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
     {
-        TREE_DUMP(tree, node, "something will happened mul0");
+        // TREE_DUMP(tree, node, "something will happened mul0");
         return  mul_0_folding(tree, node, is_changed);
     }
 
@@ -321,7 +321,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
         && ( node->right->type == NUM && is_double_equal(node->right->data, 1)
           || node->left->type  == NUM && is_double_equal(node->left->data,  1)))
     {
-        TREE_DUMP(tree, node, "something will happened mul1");
+        // TREE_DUMP(tree, node, "something will happened mul1");
         return mul_1_folding(tree, node, is_changed, 1);
     }
 
@@ -329,7 +329,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
         && ( node->right->type == NUM && is_double_equal(node->right->data, 1)
           || node->left->type  == NUM && is_double_equal(node->left->data,  1)))
     {
-        TREE_DUMP(tree, node, "something will happened exp1");
+        // TREE_DUMP(tree, node, "something will happened exp1");
         return mul_1_folding(tree, node, is_changed, 1); // not error that mul; same as * 1 == ^ 1
     }
 
@@ -337,7 +337,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
         && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
           || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
     {
-        TREE_DUMP(tree, node, "something will happened exp0");
+        // TREE_DUMP(tree, node, "something will happened exp0");
         return pow_0_folding(tree, node, is_changed);
     }
 
@@ -345,7 +345,7 @@ node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed)
         && ( node->right->type == NUM && is_double_equal(node->right->data, 0)
           || node->left->type  == NUM && is_double_equal(node->left->data,  0)))
     {
-        TREE_DUMP(tree, node, "something will happened +-0");
+        // TREE_DUMP(tree, node, "something will happened +-0");
         return mul_1_folding(tree, node, is_changed, 0);
     }
 
@@ -360,7 +360,7 @@ node_t* constant_folding(my_tree_t* tree, node_t* node, bool* is_changed)
     assert(is_changed);
 
     node_t* to_ret = NULL;
-    TREE_DUMP(tree, node, "we are here calculating this");
+    // TREE_DUMP(tree, node, "we are here calculating this");
     *is_changed = true;
     tree_val_t new_value = evaluate_tree(node);
     to_ret = new_node(tree, NUM, new_value, NULL, NULL);
@@ -397,7 +397,7 @@ node_t* mul_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
 
     node_t* to_ret = NULL;
     *is_changed = true;
-    TREE_DUMP(tree, node, "gonna changing this to zero this");
+    // TREE_DUMP(tree, node, "gonna changing this to zero this");
     to_ret = new_node(tree, NUM, 0, NULL, NULL);
 
     to_ret->parent = node->parent;
@@ -485,7 +485,7 @@ err_code_t add_taylor_coeff(my_tree_t* taylor_tree, tree_val_t x0, size_t power,
     {
         taylor_tree->root = add1;
     }
-    TREE_DUMP(taylor_tree, add1, "added this");
+    // TREE_DUMP(taylor_tree, add1, "added this");
 
     return OK;
 }
