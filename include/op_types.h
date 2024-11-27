@@ -60,10 +60,10 @@ static operation all_ops[] = {//!!! order should be equal to enum!!!
     {ARCCOS, "arccos"},
     {ARCTAN, "arctan"},
     {ARCCTG, "arcctg"},
-    {ARCSHN, "arcshn"},
-    {ARCCHS, "arcchs"},
-    {ARCTGH, "arctgh"},
-    {ARCCTH, "arccth"},
+    {ARCSHN, "arcsinh"},
+    {ARCCHS, "arccosh"},
+    {ARCTGH, "arctanh"},
+    {ARCCTH, "arccoth"},
 };
 
 #endif // OP_TYPES_H_

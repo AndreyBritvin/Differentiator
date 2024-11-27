@@ -125,7 +125,11 @@ node_t* diff_tan(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_tgh(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power)
+    UNAR_PARENT(secans, CHS_, left_copy);
+    PARENT(secans_square, EXP_, secans, numpower);
+    PARENT(to_ret, DIV_, left_diff, secans_square);
 
     return to_ret;
 }
@@ -145,35 +149,65 @@ node_t* diff_ctg(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_cth(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power);
+    NUM_(-1, negative);
+    UNAR_PARENT(secans, SHN_, left_copy);
+    PARENT(secans_square, EXP_, secans, numpower);
+    PARENT(almost_answer, DIV_, left_diff, secans_square);
+    PARENT(to_ret, MUL_, numnegative, almost_answer);
 
     return to_ret;
 }
 
 node_t* diff_arcsin(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power);
+    NUM_(0.5, sqrt_val);
+    NUM_(1, one);
+    PARENT(arg_square, EXP_, left_copy, numpower);
+    PARENT(underroot, SUB_, numone, arg_square);
+    PARENT(root, EXP_, underroot, numsqrt_val);
+    PARENT(to_ret, DIV_, left_diff, root);
 
     return to_ret;
 }
 
 node_t* diff_arccos(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power);
+    NUM_(0.5, sqrt_val);
+    NUM_(1, one);
+    PARENT(arg_square, EXP_, left_copy, numpower);
+    PARENT(underroot, SUB_, numone, arg_square);
+    PARENT(root, EXP_, underroot, numsqrt_val);
+    PARENT(division, DIV_, left_diff, root);
+
+    NUM_(-1, negative);
+    PARENT(to_ret, MUL_, numnegative, division);
 
     return to_ret;
 }
 
 node_t* diff_arctan(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(1, one);
+    NUM_(2, power);
+    PARENT(fsquare, EXP_, left_copy, numpower);
+    PARENT(znam, ADD_, numone, fsquare);
+    PARENT(to_ret, DIV_, left_diff, znam);
 
     return to_ret;
 }
 
 node_t* diff_arcctg(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    node_t* left_diff = diff_arctan(doubled_tree, node);
+    NUM_(-1, minus_one);
+    PARENT(to_ret, MUL_, numminus_one, left_diff);
 
     return to_ret;
 }
@@ -181,30 +215,47 @@ node_t* diff_arcctg(my_tree_t* doubled_tree, node_t* node)
 
 node_t* diff_arcshn(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power);
+    NUM_(0.5, sqrt_val);
+    NUM_(1, one);
+    PARENT(arg_square, EXP_, left_copy, numpower);
+    PARENT(underroot, ADD_, numone, arg_square);
+    PARENT(root, EXP_, underroot, numsqrt_val);
+    PARENT(to_ret, DIV_, left_diff, root);
 
     return to_ret;
 }
 
 node_t* diff_arcchs(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(2, power);
+    NUM_(0.5, sqrt_val);
+    NUM_(1, one);
+    PARENT(arg_square, EXP_, left_copy, numpower);
+    PARENT(underroot, SUB_, arg_square, numone);
+    PARENT(root, EXP_, underroot, numsqrt_val);
+    PARENT(to_ret, DIV_, left_diff, root);
 
     return to_ret;
 }
 
 node_t* diff_arctgh(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
+    DL; CL;
+    NUM_(1, one);
+    NUM_(2, power);
+    PARENT(fsquare, EXP_, left_copy, numpower);
+    PARENT(znam, SUB_, numone, fsquare);
+    PARENT(to_ret, DIV_, left_diff, znam);
 
     return to_ret;
 }
 
 node_t* diff_arccth(my_tree_t* doubled_tree, node_t* node)
 {
-    node_t* to_ret = NULL;
-
-    return to_ret;
+    return diff_arctgh(doubled_tree, node);
 }
 
 

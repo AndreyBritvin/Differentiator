@@ -1,2 +1,2 @@
-(cot(x))
+(arcctg(x))
 (^(-(6)(^(x)(2)))(/(sinh(x))(cosh(x))))

@@ -257,21 +257,21 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
 
             case SHN: return diff_shn(doubled_tree, node);
             case CHS: return diff_chs(doubled_tree, node);
-            // case TGH: return diff_tgh(doubled_tree, node);
-            // case CTH: return diff_cth(doubled_tree, node);
+            case TGH: return diff_tgh(doubled_tree, node);
+            case CTH: return diff_cth(doubled_tree, node);
 
             case EXP: return diff_exp(doubled_tree, node);
             case LOG: return diff_log(doubled_tree, node);
 
-            // case ARCSIN: return diff_arcsin(doubled_tree, node);
-            // case ARCCOS: return diff_arccos(doubled_tree, node);
-            // case ARCTAN: return diff_arctan(doubled_tree, node);
-            // case ARCCTG: return diff_arcctg(doubled_tree, node);
+            case ARCSIN: return diff_arcsin(doubled_tree, node);
+            case ARCCOS: return diff_arccos(doubled_tree, node);
+            case ARCTAN: return diff_arctan(doubled_tree, node);
+            case ARCCTG: return diff_arcctg(doubled_tree, node);
 
-            // case ARCSHN: return diff_arcshn(doubled_tree, node);
-            // case ARCCHS: return diff_arcchs(doubled_tree, node);
-            // case ARCTGH: return diff_arctgh(doubled_tree, node);
-            // case ARCCTH: return diff_arccth(doubled_tree, node);
+            case ARCSHN: return diff_arcshn(doubled_tree, node);
+            case ARCCHS: return diff_arcchs(doubled_tree, node);
+            case ARCTGH: return diff_arctgh(doubled_tree, node);
+            case ARCCTH: return diff_arccth(doubled_tree, node);
 
             default : fprintf(stderr, "Unknown operator in differenciate\n"); return NULL;
         }
