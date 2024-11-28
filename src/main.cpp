@@ -27,7 +27,7 @@ int main(const int argc, const char** argv)
     diff_tree.root = differenciate(&diff_tree, expr_tree.root);
     TREE_DUMP(&diff_tree, diff_tree.root, "this is tree has size = %zu", diff_tree.size);
 
-    // reduce_equation(&expr_tree);
+    reduce_equation(&expr_tree);
     reduce_equation(&diff_tree);
 
     printf("Latex of differrinciate equation:\n");
@@ -40,13 +40,13 @@ int main(const int argc, const char** argv)
     printf("\n");
     paste_graph(&expr_tree, expr_tree.root);
 
-    // my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 3);
-    // TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
-    // paste_taylor(&taylor_tree, taylor_tree.root);
+    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 2);
+    TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
+    paste_taylor(&taylor_tree, taylor_tree.root);
 
     print_ending();
 
-    // tree_dtor(&taylor_tree);
+    tree_dtor(&taylor_tree);
     tree_dtor(&expr_tree);
     tree_dtor(&diff_tree);
     free(buffer);

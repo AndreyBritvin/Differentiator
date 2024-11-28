@@ -287,9 +287,10 @@ err_code_t reduce_equation(my_tree_t* to_reduce)
     while (is_changed)
     {
         is_changed = false;
-        // TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
+        TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
         to_reduce->root = simplify_tree(to_reduce, to_reduce->root, &is_changed);
-        // TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
+        TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
+        break;
     }
 
     return OK;
@@ -380,10 +381,14 @@ node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed, tree_val_
 
     node_t* to_ret = NULL;
     *is_changed = true;
-    if (is_double_equal(node->left->data,  num_to_cmp)) to_ret = copy_subtree(tree, node->right);
-    if (is_double_equal(node->right->data, num_to_cmp)) to_ret = copy_subtree(tree, node->left);
+    if      (node->left->type == NUM
+        &&   is_double_equal(node->left->data,  num_to_cmp)) to_ret = copy_subtree(tree, node->right);
+    else if (node->right->type == NUM
+        &&   is_double_equal(node->right->data, num_to_cmp)) to_ret = copy_subtree(tree, node->left);
 
+    if (node == tree->root) tree->root = to_ret;
     to_ret->parent = node->parent;
+    // TREE_DUMP(tree, node, "replacing this node with input data = %lf", num_to_cmp);
     node_dtor(node);
 
     return to_ret;
@@ -399,6 +404,7 @@ node_t* mul_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
     *is_changed = true;
     // TREE_DUMP(tree, node, "gonna changing this to zero this");
     to_ret = new_node(tree, NUM, 0, NULL, NULL);
+    if (node == tree->root) tree->root = to_ret;
 
     to_ret->parent = node->parent;
     node_dtor(node);
@@ -415,6 +421,8 @@ node_t* pow_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
     node_t* to_ret = NULL;
     *is_changed = true;
     to_ret = new_node(tree, NUM, 1, NULL, NULL);
+    if (node == tree->root) tree->root = to_ret;
+
     to_ret->parent = node->parent;
     node_dtor(node);
 
@@ -423,7 +431,7 @@ node_t* pow_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
 
 my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
 {
-    INIT_TREE(taylor_tree);
+    INIT_TREE(taylor_tree); //TODO: make two graphs
     free(taylor_tree.root);
     taylor_tree.root = NULL;
     Global_X = x0;
@@ -442,9 +450,15 @@ my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
         tree_val_t coef_n = deriative_n / factorial(i + 1);
         printf("i = %zu, n = %lg\n", i, coef_n);
         add_taylor_coeff(&taylor_tree, x0, i, coef_n);
+        // TREE_DUMP(&diff_subtree, diff_subtree.root, "This is diff_subtree at i = %zu", i);
+        // TREE_DUMP(&diff_tree, diff_tree.root, "This is diff_tree at i = %zu", i);
 
+        diff_subtree.size = 100;
         tree_dtor(&diff_subtree);
-        diff_subtree.root = diff_tree.root;
+        diff_subtree.root = copy_subtree(&diff_tree, diff_tree.root);
+        diff_subtree.size = 100;
+
+        tree_dtor(&diff_tree);
     }
     TREE_DUMP(&taylor_tree, taylor_tree.root, "before reducing");
 

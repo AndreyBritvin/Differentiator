@@ -1,748 +1,822 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdftex 2024.11.26)  26 NOV 2024 22:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.28)  28 NOV 2024 21:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**tree_dump/latex
+**tree_dump/latex.tex
 (./tree_dump/latex.tex
-! Undefined control sequence.
-l.1 \documentclass
-                  {article}
-? 
-! Undefined control sequence.
-l.2 \usepackage
-               [T2A]{fontenc}
-? 
-! Undefined control sequence.
-l.3 \usepackage
-               [margin=0.25in]{geometry}
-? 
-! Undefined control sequence.
-l.4 \usepackage
-               {pgfplots}
-? 
-! Undefined control sequence.
-l.5 \pgfplotsset
-                {width=10cm,compat=1.9}
-? 
-! Undefined control sequence.
-l.7 \title
-          {–í–∑—è—Ç–∏–µ –ø—Ä–æ–∏–∑–≤–æ–¥–Ω–æ–π; –ì—Ä–∞—Ñ–∏–∫–∏; –¢–µ–π–ª–æ—Ä...
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 
-? 
-Missing character: There is no – in font cmr10!
-Missing character: There is no í in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no è in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no π in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ì in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ñ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∫ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¢ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no π in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-! Undefined control sequence.
-l.8 \author
-           {Andrey Britvin}
-? 
-! Undefined control sequence.
-l.9 \date
-         {November 2024}
-? 
-! Undefined control sequence.
-l.10 \begin
-           {document}
-? 
-! Undefined control sequence.
-l.11 \maketitle
-               
-? 
-! Undefined control sequence.
-l.12 \section
-             {–ù–∞–∑–∞–¥ –∫ –∏—Å—Ç–æ–∫–∞–º}
-? 
-Missing character: There is no – in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∫ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Å in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∫ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no º in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no í in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ö in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Å in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∂ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no ã in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ö in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ± in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no π in font cmr10!
-! Undefined control sequence.
-l.14 \[
-       (6)' = 0\]
-? 
-! Undefined control sequence.
-l.14 \[(6)' = 0\]
-                 
-? 
-Missing character: There is no – in font cmr10!
-Missing character: There is no ò in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ± in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no ã in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no º in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no É in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no º in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no å in font cmr10!
-! Undefined control sequence.
-l.16 \[
-       (x)' = 1\]
-? 
-! Undefined control sequence.
-l.16 \[(x)' = 1\]
-                 
-? 
-Missing character: There is no – in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no π in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no É in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no á in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no å in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no é in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ± in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no ã in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ± in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no ã in font cmr10!
-! Undefined control sequence.
-l.18 \[
-       ((6-(x)^{2}))' = (0-((2*(x)^{1})*1))\]
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-<to be read again> 
-                   ^
-l.18 \[((6-(x)^
-               {2}))' = (0-((2*(x)^{1})*1))\]
-? 
-! Undefined control sequence.
-l.18 \[((6-(x)^{2}))' = (0-((2*(x)^{1})*1))\]
-                                             
-? 
-! Undefined control sequence.
-l.20 \[
-       (x)' = 1\]
-? 
-! Undefined control sequence.
-l.20 \[(x)' = 1\]
-                 
-? 
-! Undefined control sequence.
-l.22 \[
-       (x)' = 1\]
-? 
-! Undefined control sequence.
-l.22 \[(x)' = 1\]
-                 
-? 
-! Undefined control sequence.
-l.24 \[
-       (\frac{\sinh(x)}{\cosh(x)})' = \frac{(((\cosh(x)*1)*\cosh(x))-((\sinh...
+(/usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2aenc.def
+File: t2aenc.def 2022/06/11 v1.0j Cyrillic encoding definition file
+Now handling font encoding T2A ...
+... processing UTF-8 mapping file for font encoding T2A
 
-? 
-! Undefined control sequence.
-l.24 \[(\frac
-             {\sinh(x)}{\cosh(x)})' = \frac{(((\cosh(x)*1)*\cosh(x))-((\sinh...
+(/usr/share/texlive/texmf-dist/tex/latex/base/t2aenc.dfu
+File: t2aenc.dfu 2022/06/07 v1.3c UTF-8 support
+   defining Unicode char U+00A4 (decimal 164)
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0237 (decimal 567)
+   defining Unicode char U+0400 (decimal 1024)
+   defining Unicode char U+0401 (decimal 1025)
+   defining Unicode char U+0402 (decimal 1026)
+   defining Unicode char U+0403 (decimal 1027)
+   defining Unicode char U+0404 (decimal 1028)
+   defining Unicode char U+0405 (decimal 1029)
+   defining Unicode char U+0406 (decimal 1030)
+   defining Unicode char U+0407 (decimal 1031)
+   defining Unicode char U+0408 (decimal 1032)
+   defining Unicode char U+0409 (decimal 1033)
+   defining Unicode char U+040A (decimal 1034)
+   defining Unicode char U+040B (decimal 1035)
+   defining Unicode char U+040C (decimal 1036)
+   defining Unicode char U+040D (decimal 1037)
+   defining Unicode char U+040E (decimal 1038)
+   defining Unicode char U+040F (decimal 1039)
+   defining Unicode char U+0410 (decimal 1040)
+   defining Unicode char U+0411 (decimal 1041)
+   defining Unicode char U+0412 (decimal 1042)
+   defining Unicode char U+0413 (decimal 1043)
+   defining Unicode char U+0414 (decimal 1044)
+   defining Unicode char U+0415 (decimal 1045)
+   defining Unicode char U+0416 (decimal 1046)
+   defining Unicode char U+0417 (decimal 1047)
+   defining Unicode char U+0418 (decimal 1048)
+   defining Unicode char U+0419 (decimal 1049)
+   defining Unicode char U+041A (decimal 1050)
+   defining Unicode char U+041B (decimal 1051)
+   defining Unicode char U+041C (decimal 1052)
+   defining Unicode char U+041D (decimal 1053)
+   defining Unicode char U+041E (decimal 1054)
+   defining Unicode char U+041F (decimal 1055)
+   defining Unicode char U+0420 (decimal 1056)
+   defining Unicode char U+0421 (decimal 1057)
+   defining Unicode char U+0422 (decimal 1058)
+   defining Unicode char U+0423 (decimal 1059)
+   defining Unicode char U+0424 (decimal 1060)
+   defining Unicode char U+0425 (decimal 1061)
+   defining Unicode char U+0426 (decimal 1062)
+   defining Unicode char U+0427 (decimal 1063)
+   defining Unicode char U+0428 (decimal 1064)
+   defining Unicode char U+0429 (decimal 1065)
+   defining Unicode char U+042A (decimal 1066)
+   defining Unicode char U+042B (decimal 1067)
+   defining Unicode char U+042C (decimal 1068)
+   defining Unicode char U+042D (decimal 1069)
+   defining Unicode char U+042E (decimal 1070)
+   defining Unicode char U+042F (decimal 1071)
+   defining Unicode char U+0430 (decimal 1072)
+   defining Unicode char U+0431 (decimal 1073)
+   defining Unicode char U+0432 (decimal 1074)
+   defining Unicode char U+0433 (decimal 1075)
+   defining Unicode char U+0434 (decimal 1076)
+   defining Unicode char U+0435 (decimal 1077)
+   defining Unicode char U+0436 (decimal 1078)
+   defining Unicode char U+0437 (decimal 1079)
+   defining Unicode char U+0438 (decimal 1080)
+   defining Unicode char U+0439 (decimal 1081)
+   defining Unicode char U+043A (decimal 1082)
+   defining Unicode char U+043B (decimal 1083)
+   defining Unicode char U+043C (decimal 1084)
+   defining Unicode char U+043D (decimal 1085)
+   defining Unicode char U+043E (decimal 1086)
+   defining Unicode char U+043F (decimal 1087)
+   defining Unicode char U+0440 (decimal 1088)
+   defining Unicode char U+0441 (decimal 1089)
+   defining Unicode char U+0442 (decimal 1090)
+   defining Unicode char U+0443 (decimal 1091)
+   defining Unicode char U+0444 (decimal 1092)
+   defining Unicode char U+0445 (decimal 1093)
+   defining Unicode char U+0446 (decimal 1094)
+   defining Unicode char U+0447 (decimal 1095)
+   defining Unicode char U+0448 (decimal 1096)
+   defining Unicode char U+0449 (decimal 1097)
+   defining Unicode char U+044A (decimal 1098)
+   defining Unicode char U+044B (decimal 1099)
+   defining Unicode char U+044C (decimal 1100)
+   defining Unicode char U+044D (decimal 1101)
+   defining Unicode char U+044E (decimal 1102)
+   defining Unicode char U+044F (decimal 1103)
+   defining Unicode char U+0450 (decimal 1104)
+   defining Unicode char U+0451 (decimal 1105)
+   defining Unicode char U+0452 (decimal 1106)
+   defining Unicode char U+0453 (decimal 1107)
+   defining Unicode char U+0454 (decimal 1108)
+   defining Unicode char U+0455 (decimal 1109)
+   defining Unicode char U+0456 (decimal 1110)
+   defining Unicode char U+0457 (decimal 1111)
+   defining Unicode char U+0458 (decimal 1112)
+   defining Unicode char U+0459 (decimal 1113)
+   defining Unicode char U+045A (decimal 1114)
+   defining Unicode char U+045B (decimal 1115)
+   defining Unicode char U+045C (decimal 1116)
+   defining Unicode char U+045D (decimal 1117)
+   defining Unicode char U+045E (decimal 1118)
+   defining Unicode char U+045F (decimal 1119)
+   defining Unicode char U+0490 (decimal 1168)
+   defining Unicode char U+0491 (decimal 1169)
+   defining Unicode char U+0492 (decimal 1170)
+   defining Unicode char U+0493 (decimal 1171)
+   defining Unicode char U+0496 (decimal 1174)
+   defining Unicode char U+0497 (decimal 1175)
+   defining Unicode char U+0498 (decimal 1176)
+   defining Unicode char U+0499 (decimal 1177)
+   defining Unicode char U+049A (decimal 1178)
+   defining Unicode char U+049B (decimal 1179)
+   defining Unicode char U+049C (decimal 1180)
+   defining Unicode char U+049D (decimal 1181)
+   defining Unicode char U+04A0 (decimal 1184)
+   defining Unicode char U+04A1 (decimal 1185)
+   defining Unicode char U+04A2 (decimal 1186)
+   defining Unicode char U+04A3 (decimal 1187)
+   defining Unicode char U+04A4 (decimal 1188)
+   defining Unicode char U+04A5 (decimal 1189)
+   defining Unicode char U+04AA (decimal 1194)
+   defining Unicode char U+04AB (decimal 1195)
+   defining Unicode char U+04AE (decimal 1198)
+   defining Unicode char U+04AF (decimal 1199)
+   defining Unicode char U+04B0 (decimal 1200)
+   defining Unicode char U+04B1 (decimal 1201)
+   defining Unicode char U+04B2 (decimal 1202)
+   defining Unicode char U+04B3 (decimal 1203)
+   defining Unicode char U+04B6 (decimal 1206)
+   defining Unicode char U+04B7 (decimal 1207)
+   defining Unicode char U+04B8 (decimal 1208)
+   defining Unicode char U+04B9 (decimal 1209)
+   defining Unicode char U+04BA (decimal 1210)
+   defining Unicode char U+04BB (decimal 1211)
+   defining Unicode char U+04C0 (decimal 1216)
+   defining Unicode char U+04C1 (decimal 1217)
+   defining Unicode char U+04C2 (decimal 1218)
+   defining Unicode char U+04D0 (decimal 1232)
+   defining Unicode char U+04D1 (decimal 1233)
+   defining Unicode char U+04D2 (decimal 1234)
+   defining Unicode char U+04D3 (decimal 1235)
+   defining Unicode char U+04D4 (decimal 1236)
+   defining Unicode char U+04D5 (decimal 1237)
+   defining Unicode char U+04D6 (decimal 1238)
+   defining Unicode char U+04D7 (decimal 1239)
+   defining Unicode char U+04D8 (decimal 1240)
+   defining Unicode char U+04D9 (decimal 1241)
+   defining Unicode char U+04DA (decimal 1242)
+   defining Unicode char U+04DB (decimal 1243)
+   defining Unicode char U+04DC (decimal 1244)
+   defining Unicode char U+04DD (decimal 1245)
+   defining Unicode char U+04DE (decimal 1246)
+   defining Unicode char U+04DF (decimal 1247)
+   defining Unicode char U+04E2 (decimal 1250)
+   defining Unicode char U+04E3 (decimal 1251)
+   defining Unicode char U+04E4 (decimal 1252)
+   defining Unicode char U+04E5 (decimal 1253)
+   defining Unicode char U+04E6 (decimal 1254)
+   defining Unicode char U+04E7 (decimal 1255)
+   defining Unicode char U+04E8 (decimal 1256)
+   defining Unicode char U+04E9 (decimal 1257)
+   defining Unicode char U+04EC (decimal 1260)
+   defining Unicode char U+04ED (decimal 1261)
+   defining Unicode char U+04EE (decimal 1262)
+   defining Unicode char U+04EF (decimal 1263)
+   defining Unicode char U+04F0 (decimal 1264)
+   defining Unicode char U+04F1 (decimal 1265)
+   defining Unicode char U+04F2 (decimal 1266)
+   defining Unicode char U+04F3 (decimal 1267)
+   defining Unicode char U+04F4 (decimal 1268)
+   defining Unicode char U+04F5 (decimal 1269)
+   defining Unicode char U+04F8 (decimal 1272)
+   defining Unicode char U+04F9 (decimal 1273)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2116 (decimal 8470)
+   defining Unicode char U+2329 (decimal 9001)
+   defining Unicode char U+3008 (decimal 12296)
+   defining Unicode char U+232A (decimal 9002)
+   defining Unicode char U+3009 (decimal 12297)
+   defining Unicode char U+2423 (decimal 9251)
+   defining Unicode char U+27E8 (decimal 10216)
+   defining Unicode char U+27E9 (decimal 10217)
+   defining Unicode char U+FB00 (decimal 64256)
+   defining Unicode char U+FB01 (decimal 64257)
+   defining Unicode char U+FB02 (decimal 64258)
+   defining Unicode char U+FB03 (decimal 64259)
+   defining Unicode char U+FB04 (decimal 64260)
+   defining Unicode char U+FB05 (decimal 64261)
+   defining Unicode char U+FB06 (decimal 64262)
+))
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 1
+12.
 
-? 
-! Undefined control sequence.
-l.24 \[(\frac{\sinh(x)}{\cosh(x)})' = \frac
-                                           {(((\cosh(x)*1)*\cosh(x))-((\sinh...
+(/usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2acmr.fd
+File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
+))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
 
-? 
-! Undefined control sequence.
-l.24 ...(\sinh(x)*1)*\sinh(x)))}{(\cosh(x))^{2}}\]
-                                                  
-? 
-! Undefined control sequence.
-l.26 \[
-       (((6-(x)^{2}))^{\frac{\sinh(x)}{\cosh(x)}})' = (((6-(x)^{2}))^{\frac{...
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-? 
-! Undefined control sequence.
-l.26 \[(((6-(x)^{2}))^{\frac
-                            {\sinh(x)}{\cosh(x)}})' = (((6-(x)^{2}))^{\frac{...
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count193
+\Gm@cntv=\count194
+\c@Gm@tempcnt=\count195
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
 
-? 
-! Undefined control sequence.
-l.26 ...h(x)}{\cosh(x)}})' = (((6-(x)^{2}))^{\frac
-                                                  {\sinh(x)}{\cosh(x)}}*((\f...
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-? 
-! Undefined control sequence.
-l.26 ...^{2}))^{\frac{\sinh(x)}{\cosh(x)}}*((\frac
-                                                  {\frac{\sinh(x)}{\cosh(x)}...
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
 
-? 
-! Undefined control sequence.
-l.26 ...^{\frac{\sinh(x)}{\cosh(x)}}*((\frac{\frac
-                                                  {\sinh(x)}{\cosh(x)}}{(6-(...
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
 
-? 
-! Undefined control sequence.
-l.26 ...6-(x)^{2})}*(2*x))+(\ln((6-(x)^{2}))*\frac
-                                                  {((\cosh(x)*\cosh(x))-(\si...
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks18
+\pgfutil@tempdima=\dimen151
+\pgfutil@tempdimb=\dimen152
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box51
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
 
-? 
-! Undefined control sequence.
-l.26 ...(\sinh(x)*\sinh(x)))}{(\cosh(x))^{2}})))\]
-                                                  
-? 
-! Undefined control sequence.
-l.27 \section
-             {–ö—Ä–∏–≤—É–ª—å–∫–∏}
-? 
-! Undefined control sequence.
-l.28 \begin
-           {tikzpicture}
-? 
-! Undefined control sequence.
-l.29 \begin
-           {axis}[xmin=-11,xmax=11,
-? 
-! Undefined control sequence.
-l.37 ticklabel style={font=\tiny
-                                ,fill=white},
-? 
-! Undefined control sequence.
-l.41 \addplot
-             [color=red, samples=1000]{((6-(x)^(2)))^((sinh(x))/(cosh(x)))};
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-<to be read again> 
-                   \end 
-l.42 \end
-         {axis}
-? 
-Missing character: There is no – in font cmr10!
-Missing character: There is no ò in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ± in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no ã in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no º in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no É in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no º in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no å in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no û in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no á in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no á in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∫ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no º in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no å in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no á in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ç in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no í in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ö in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ¥ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Å in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∂ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no ã in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ö in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ø in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no µ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ± in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∑ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no æ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∞ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no Ω in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no π in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ö in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ≤ in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no É in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ª in font cmr10!
-Missing character: There is no — in font cmr10!
-Missing character: There is no å in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∫ in font cmr10!
-Missing character: There is no – in font cmr10!
-Missing character: There is no ∏ in font cmr10!
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
 
-Overfull \hbox (40.17564pt too wide) in paragraph at lines 7--42
-\tenrm ((2 \tensy ^^C \tenrm (\teni x\tenrm )[]) \tensy ^^C \tenrm 1))(\teni x\
-tenrm )[] = 1(\teni x\tenrm )[] = 1([][])[] = [][](((6 \tensy ^^@|
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks19
+\pgfkeys@temptoks=\toks20
 
-\hbox(8.14003+2.5)x469.75499, glue set - 1.0
-.\tenrm (
-.\tenrm (
-.\tenrm 2
-.\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-.\tensy ^^C
-.etc.
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered
+.code.tex
+\pgfkeys@tmptoks=\toks21
+))
+\pgf@x=\dimen153
+\pgf@y=\dimen154
+\pgf@xa=\dimen155
+\pgf@ya=\dimen156
+\pgf@xb=\dimen157
+\pgf@yb=\dimen158
+\pgf@xc=\dimen159
+\pgf@yc=\dimen160
+\pgf@xd=\dimen161
+\pgf@yd=\dimen162
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count196
+\c@pgf@countb=\count197
+\c@pgf@countc=\count198
+\c@pgf@countd=\count199
+\t@pgf@toka=\toks22
+\t@pgf@tokb=\toks23
+\t@pgf@tokc=\toks24
+\pgf@sys@id@count=\count266
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
 
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count267
+\pgfsyssoftpath@bigbuffer@items=\count268
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
 
-Overfull \hbox (148.11967pt too wide) in paragraph at lines 7--42
-\tensy ^^@\tenrm 11\teni ; ymax \tenrm = 11\teni ; grid \tenrm = \teni both; gr
-idstyle \tenrm = []\teni ; majorgridstyle \tenrm = []\teni ; axislines \tenrm =
-|
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
 
-\hbox(6.94444+1.94444)x469.75499
-.\tensy ^^@
-.\tenrm 1
-.\tenrm 1
-.\teni ;
-.\glue(\thinmuskip) 1.66663
-.etc.
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
 
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen163
+\pgfmath@count=\count269
+\pgfmath@box=\box52
+\pgfmath@toks=\toks25
+\pgfmath@stack@operand=\toks26
+\pgfmath@stack@operation=\toks27
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count270
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen164
+\pgf@picmaxx=\dimen165
+\pgf@picminy=\dimen166
+\pgf@picmaxy=\dimen167
+\pgf@pathminx=\dimen168
+\pgf@pathmaxx=\dimen169
+\pgf@pathminy=\dimen170
+\pgf@pathmaxy=\dimen171
+\pgf@xx=\dimen172
+\pgf@xy=\dimen173
+\pgf@yx=\dimen174
+\pgf@yy=\dimen175
+\pgf@zx=\dimen176
+\pgf@zy=\dimen177
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen178
+\pgf@path@lasty=\dimen179
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen180
+\pgf@shorten@start@additional=\dimen181
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box53
+\pgf@hbox=\box54
+\pgf@layerbox@main=\box55
+\pgf@picture@serial@count=\count271
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen182
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen183
+\pgf@pt@y=\dimen184
+\pgf@pt@temp=\dimen185
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen186
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen187
+\pgf@sys@shading@range@num=\count272
+\pgf@shadingcount=\count273
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box56
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box57
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen188
+\pgf@nodesepend=\dimen189
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen190
+\pgffor@skip=\dimen191
+\pgffor@stack=\toks28
+\pgffor@toks=\toks29
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 
-Overfull \hbox (10.31203pt too wide) in paragraph at lines 7--42
-\teni middle; minorticknum \tenrm = 4\teni ; axislinestyle \tenrm = []\teni ; t
-icklabelstyle \tenrm = []\teni ; xlabelstyle \tenrm =|
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count274
+\pgfplotmarksize=\dimen192
+)
+\tikz@lastx=\dimen193
+\tikz@lasty=\dimen194
+\tikz@lastxsaved=\dimen195
+\tikz@lastysaved=\dimen196
+\tikz@lastmovetox=\dimen197
+\tikz@lastmovetoy=\dimen198
+\tikzleveldistance=\dimen199
+\tikzsiblingdistance=\dimen256
+\tikz@figbox=\box58
+\tikz@figbox@bg=\box59
+\tikz@tempbox=\box60
+\tikz@tempbox@bg=\box61
+\tikztreelevel=\count275
+\tikznumberofchildren=\count276
+\tikznumberofcurrentchild=\count277
+\tikz@fig@count=\count278
 
-\hbox(6.94444+1.94444)x469.75499
-.\teni m
-.\teni i
-.\teni d
-.\teni d
-.\teni l
-.etc.
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count279
+\pgfmatrixcurrentcolumn=\count280
+\pgf@matrix@numberofcolumns=\count281
+)
+\tikz@expandcount=\count282
 
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks30
+\t@pgfplots@tokb=\toks31
+\t@pgfplots@tokc=\toks32
+\pgfplots@tmpa=\dimen257
+\c@pgfplots@coordindex=\count283
+\c@pgfplots@scanlineindex=\count284
 
-Overfull \hbox (19.97295pt too wide) in paragraph at lines 7--42
-[]\teni ; ylabelstyle \tenrm = []][\teni color \tenrm =|
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code
+.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldp
+gfsupp_loader.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex
+)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks33
+\t@pgf@tokb=\toks34
+\t@pgf@tokc=\toks35
 
-\hbox(7.5+2.5)x469.75499
-.\hbox(7.5+2.5)x193.48665
-..\teni a
-..\teni t
-..\glue(\thickmuskip) 2.77771 plus 2.77771
-..\tenrm =
-..\glue(\thickmuskip) 2.77771 plus 2.77771
-..etc.
-.\teni ;
-.\glue(\thinmuskip) 1.66663
-.\teni y
-.\kern0.35878
-.etc.
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldp
+gfsupp_pgfutil-common-lists.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotslists
+tructure.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotslists
+tructureext.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray
+.code.tex
+\c@pgfplotsarray@tmp=\count285
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatri
+x.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshare
+d.code.tex
+\c@pgfplotstable@counta=\count286
+\t@pgfplotstable@a=\toks36
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.te
+x
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.co
+de.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.sur
+fshading.code.tex
+\c@pgfplotslibrarysurf@no=\count287
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] )</usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy7.pfb>
-Output written on latex.pdf (1 page, 63805 bytes).
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surf
+shading.pgfsys-pdftex.def)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.
+tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.t
+ex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.cod
+e.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.
+tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
+e.tex
+\pgfdecoratedcompleteddistance=\dimen258
+\pgfdecoratedremainingdistance=\dimen259
+\pgfdecoratedinputsegmentcompleteddistance=\dimen260
+\pgfdecoratedinputsegmentremainingdistance=\dimen261
+\pgf@decorate@distancetomove=\dimen262
+\pgf@decorate@repeatstate=\count288
+\pgfdecorationsegmentamplitude=\dimen263
+\pgfdecorationsegmentlength=\dimen264
+)
+\tikz@lib@dec@box=\box62
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.pathmorphing.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.pathmorphing.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.pathreplacing.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.pathreplacing.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.co
+ntourlua.code.tex)
+\pgfplots@numplots=\count289
+\pgfplots@xmin@reg=\dimen265
+\pgfplots@xmax@reg=\dimen266
+\pgfplots@ymin@reg=\dimen267
+\pgfplots@ymax@reg=\dimen268
+\pgfplots@zmin@reg=\dimen269
+\pgfplots@zmax@reg=\dimen270
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.co
+de.tex
+File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count290
+\l__pdf_internal_box=\box63
+)
+(./latex.aux)
+\openout1 = `latex.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(18.06749pt, 578.16002pt, 18.06749pt)
+* v-part:(T,H,B)=(18.06749pt, 758.835pt, 18.06749pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=578.16002pt
+* \textheight=758.835pt
+* \oddsidemargin=-54.2025pt
+* \evensidemargin=-54.2025pt
+* \topmargin=-91.2025pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count291
+\scratchdimen=\dimen271
+\scratchbox=\box64
+\nofMPsegments=\count292
+\nofMParguments=\count293
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count294
+\MPscratchDim=\dimen272
+\MPnumerator=\count295
+\makeMPintoPDFobject=\count296
+\everyMPtoPDFconversion=\toks38
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package pgfplots notification 'compat/show suggested version=true': you might b
+enefit from \pgfplotsset{compat=1.18} (current compat level: 1.9).
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 14.
+Missing character: There is no . in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+
+Overfull \hbox (348.00752pt too wide) detected at line 55
+\OT1/cmr/m/n/10 ([])[] = []
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./latex.aux) ) 
+Here is how much of TeX's memory you used:
+ 23638 strings out of 477525
+ 620180 string characters out of 5832488
+ 1864330 words of memory out of 5000000
+ 43443 multiletter control sequences out of 15000+600000
+ 519856 words of font info for 47 fonts, out of 8000000 for 9000
+ 430 hyphenation exceptions out of 8191
+ 99i,9n,103p,746b,1963s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home
+/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1000.600pk> </home
+/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </home
+/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </home
+/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1728.600pk></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb>
+Output written on latex.pdf (2 pages, 112488 bytes).
 PDF statistics:
- 32 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 183 PDF objects out of 1000 (max. 8388607)
+ 46 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
