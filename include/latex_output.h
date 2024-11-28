@@ -26,5 +26,6 @@ err_code_t paste_taylor(my_tree_t* tree, node_t* node);
 
 err_code_t print_equation_begining(my_tree_t* tree, node_t* node_before, const char* text);
 err_code_t print_equation_ending(my_tree_t* tree, node_t* node_before, const char* text, latex_output_mode is_diff);
+err_code_t paste_two_graphs(my_tree_t* tree_1, my_tree_t* tree_2, tree_val_t x0);
 
 #endif // LATEX_OUTPUT_H_

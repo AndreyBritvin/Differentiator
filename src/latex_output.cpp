@@ -186,6 +186,8 @@ err_code_t disable_latex_output()
 
     fclose(LATEX_FILE);
 
+    system("pdflatex tree_dump/latex.tex");
+
     return OK;
 }
 
@@ -292,6 +294,41 @@ err_code_t paste_taylor(my_tree_t* tree, node_t* node)
           "\\[");
     latex_node(tree, node, LATEX_FILE, FORMULA_MODE);
     LATEX("\\]\n");
+
+    return OK;
+}
+
+err_code_t paste_two_graphs(my_tree_t* tree_1, my_tree_t* tree_2, tree_val_t x0)
+{
+LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 %lf}\n", x0);
+
+    LATEX(
+    "\\begin{tikzpicture}\n"
+    "\\begin{axis}["
+    "xmin=-11,xmax=11,\n"
+    "ymin=-11,ymax=11,\n"
+    "grid=both,\n"
+    "grid style={line width=.1pt, draw=gray!10},\n"
+    "major grid style={line width=.2pt,draw=gray!50},\n"
+    "axis lines=middle,\n"
+    "minor tick num=4,\n"
+    "axis line style={latex-latex},\n"
+    "ticklabel style={font=\\tiny,fill=white},\n"
+    "xlabel style={at={(ticklabel* cs:1)},anchor=north west},\n"
+    "ylabel style={at={(ticklabel* cs:1)},anchor=south west}\n"
+    "]\n"
+    "\\addplot[color=red, samples=1000]{"
+        );
+    latex_node(tree_1, tree_1->root, LATEX_FILE, GRAPH_MODE);
+    LATEX("};\n"
+    "\\addplot[color=blue, samples=1000]{"
+        );
+    latex_node(tree_2, tree_2->root, LATEX_FILE, GRAPH_MODE);
+    LATEX(
+    "};\n"
+    "\\end{axis}\n"
+    "\\end{tikzpicture}\n"
+        );
 
     return OK;
 }

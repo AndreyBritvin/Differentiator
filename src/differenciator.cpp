@@ -431,7 +431,7 @@ node_t* pow_0_folding(my_tree_t* tree, node_t* node, bool* is_changed)
 
 my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
 {
-    INIT_TREE(taylor_tree); //TODO: make two graphs
+    INIT_TREE(taylor_tree);
     free(taylor_tree.root);
     taylor_tree.root = NULL;
     Global_X = x0;
