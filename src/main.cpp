@@ -41,19 +41,19 @@ int main(const int argc, const char** argv)
     printf("\n");
     paste_graph(&expr_tree, expr_tree.root);
 
-    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 5);
-    TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
-    paste_taylor(&taylor_tree, taylor_tree.root);
-    paste_two_graphs(&expr_tree, &taylor_tree, 0.5);
+    // my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 5);
+    // TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
+    // paste_taylor(&taylor_tree, taylor_tree.root);
+    // paste_two_graphs(&expr_tree, &taylor_tree, 0.5);
 
     print_ending();
 
-    tree_dtor(&taylor_tree);
+    // tree_dtor(&taylor_tree);
     tree_dtor(&expr_tree);
     tree_dtor(&diff_tree);
     free(buffer);
 
-    disable_latex_output();
+    // disable_latex_output();
     disable_logging();
 
     return OK;
