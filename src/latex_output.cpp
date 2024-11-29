@@ -12,21 +12,21 @@ static size_t lines_num = 0;
 #define LATEX(...) if (LATEX_FILE != NULL) fprintf(LATEX_FILE, __VA_ARGS__);
 
 #define  INFIX_OUT(text, L, R)  fprintf(output, "(");                       \
-                                latex_node(tree, L, output, is_graph_mode); \
+                                latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
                                 fprintf(output, text);                      \
-                                latex_node(tree, R, output, is_graph_mode); \
+                                latex_node(tree, R, output, is_graph_mode, recurs_level + 1); \
                                 fprintf(output, ")");
                                 // fprintf(output, ")");
                                 // fprintf(output, "(");
 
 #define  POWER_OUT(text, L, R)  fprintf(output, "(");                       \
-                                latex_node(tree, L, output, is_graph_mode); \
+                                latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
                                 fprintf(output, ")");                       \
                                 fprintf(output, text);                      \
                                 if (is_graph_mode == GRAPH_MODE)            \
                                 fprintf(output, "(");                       \
                                 else fprintf(output, "{");                  \
-                                latex_node(tree, R, output, is_graph_mode); \
+                                latex_node(tree, R, output, is_graph_mode, recurs_level + 1); \
                                 if (is_graph_mode == GRAPH_MODE)            \
                                 fprintf(output, ")");                       \
                                 else fprintf(output, "}");
@@ -34,38 +34,50 @@ static size_t lines_num = 0;
 #define PREFIX_OUT(text, L, R)  if (is_graph_mode == GRAPH_MODE)                \
                                 {                                               \
                                     fprintf(output, "(");                       \
-                                    latex_node(tree, L, output, is_graph_mode); \
+                                    latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
                                     fprintf(output, ")");                       \
                                     fprintf(output, "/");                       \
                                     fprintf(output, "(");                       \
-                                    latex_node(tree, R, output, is_graph_mode); \
+                                    latex_node(tree, R, output, is_graph_mode, recurs_level + 1); \
                                     fprintf(output, ")");                       \
                                 }                                               \
                                 else                                            \
                                 {                                               \
                                     fprintf(output, text);                      \
                                     fprintf(output, "{");                       \
-                                    latex_node(tree, L, output, is_graph_mode); \
+                                    latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
                                     fprintf(output, "}{");                      \
-                                    latex_node(tree, R, output, is_graph_mode); \
+                                    latex_node(tree, R, output, is_graph_mode, recurs_level + 1); \
                                     fprintf(output, "}");                       \
                                 }
 
 #define UNAR_OUT(text, L)       if (is_graph_mode != GRAPH_MODE) fprintf(output, "\\");         \
                                 fprintf(output, text);                                          \
                                 fprintf(output, "(");                                           \
-                                latex_node(tree, L, output, is_graph_mode);                     \
+                                latex_node(tree, L, output, is_graph_mode, recurs_level + 1);   \
                                 fprintf(output, ")");
 
 #define TYPE_NAME all_ops[(int) node->data].text
 #define LEFT      node->left
 #define RIGHT     node->right
 
-err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output, bool is_graph_mode)
+node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mode is_graph_mode, size_t recurs_level)
 {
     assert(tree);
     assert(output);
     assert(node);
+    static node_t** subtrees_indexes = NULL;
+    static size_t subtrees_count = 0;
+
+    if (is_graph_mode == FORMULA_MODE && recurs_level == RECURSION_BEGIN)
+    {
+        subtrees_count = 0;
+        subtrees_indexes = (node_t**) calloc(256, sizeof(node_t*));
+        // TREE_DUMP(tree, node, "This is latex_node. Before creation nodes");
+        generate_subtrees(tree, node, RECURSION_BEGIN);
+        printf("node addr = %p\n", node);
+        // TREE_DUMP(tree, node, "This is latex_node. After creation nodes");
+    }
 
     switch (node->type)
     {
@@ -107,9 +119,37 @@ err_code_t latex_node(my_tree_t* tree, node_t* node, FILE* output, bool is_graph
             }
             break;
         }
+        case SUBTREE:
+        {
+            fprintf(output, "%c", (char) node->data);
+            printf("We are in subtree with name = %c\n", (char) node->data);
+            subtrees_indexes[subtrees_count++] = node;
+            // latex_node(tree, node->left, output, is_graph_mode, recurs_level + 1);
+            break;
+        }
         default:
             fprintf(stderr, "unknown operation in latex_node"); break;
     }
+
+    if (is_graph_mode == FORMULA_MODE && recurs_level == RECURSION_BEGIN)
+    {
+        print_subtrees(tree, output, subtrees_indexes);
+        remove_subtrees(tree, node);
+    }
+
+    return subtrees_indexes;
+}
+
+err_code_t print_subtrees(my_tree_t* tree, FILE* output, node_t** subtrees)
+{
+    for (size_t i = 0; i < 256; i++)
+    {
+        if (subtrees[i] == NULL) continue;
+        fprintf(output, "%c = ", (char) subtrees[i]->data);
+        latex_node(tree, subtrees[i]->left, output, FORMULA_MODE, RECURSION_BEGIN + 1);
+        fprintf(output, "\n");
+    }
+    free(subtrees);
 
     return OK;
 }
@@ -145,12 +185,12 @@ err_code_t fill_jokes(const char* filename)
     {
         SAFE_CALLOC(line, char, MAX_STRING_SIZE);
         fgets(line, MAX_STRING_SIZE, jokes_file);
-        printf("line %zu = %s\n", i, line);
+        // printf("line %zu = %s\n", i, line);
         all_jokes[i] = line;
     }
     for (size_t i = 0; i < lines_num; i++)
     {
-        printf("%s\n", all_jokes[i]);
+        // printf("%s\n", all_jokes[i]);
     }
 
     free(buffer);
@@ -222,9 +262,10 @@ err_code_t print_equation(my_tree_t* tree, node_t* node_before, node_t* node_aft
 {
     LATEX("%s"
           "\\[(", all_jokes[rand() % lines_num]);
-    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE);
-    LATEX(")' = ");
-    latex_node(tree, node_after, LATEX_FILE, FORMULA_MODE);
+    // TREE_DUMP(tree, tree->root, "This is latex_node. Before creation nodes");
+    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
+    LATEX(")'\\] \n Есть не что иное, как\n \\[");
+    latex_node(tree, node_after, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
     LATEX("\\]\n");
 
     return OK;
@@ -234,7 +275,7 @@ err_code_t print_equation_begining(my_tree_t* tree, node_t* node_before, const c
 {
     LATEX("%s\n", text);
     LATEX("\\[(");
-    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE);
+    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
     LATEX(")'\n");
 
     return OK;
@@ -243,7 +284,7 @@ err_code_t print_equation_begining(my_tree_t* tree, node_t* node_before, const c
 err_code_t print_equation_ending(my_tree_t* tree, node_t* node_before, latex_output_mode is_diff)
 {
     LATEX("(");
-    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE);
+    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
     LATEX(")");
     if (is_diff = DIFF)
     LATEX("'");
@@ -276,7 +317,7 @@ err_code_t paste_graph(my_tree_t* tree, node_t* node)
     "]\n"
     "\\addplot[color=red, samples=1000]{"
         );
-    latex_node(tree, node, LATEX_FILE, GRAPH_MODE);
+    latex_node(tree, node, LATEX_FILE, GRAPH_MODE, RECURSION_BEGIN);
     LATEX(
     "};\n"
     "\\end{axis}\n"
@@ -292,7 +333,7 @@ err_code_t paste_taylor(my_tree_t* tree, node_t* node)
 
     LATEX("Вот тейлорово разложение. После контрольной в самый раз\n"
           "\\[");
-    latex_node(tree, node, LATEX_FILE, FORMULA_MODE);
+    latex_node(tree, node, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
     LATEX("\\]\n");
 
     return OK;
@@ -300,7 +341,7 @@ err_code_t paste_taylor(my_tree_t* tree, node_t* node)
 
 err_code_t paste_two_graphs(my_tree_t* tree_1, my_tree_t* tree_2, tree_val_t x0)
 {
-LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 %lf}\n", x0);
+    LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 %lf}\n", x0);
 
     LATEX(
     "\\begin{tikzpicture}\n"
@@ -319,11 +360,11 @@ LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестн
     "]\n"
     "\\addplot[color=red, samples=1000]{"
         );
-    latex_node(tree_1, tree_1->root, LATEX_FILE, GRAPH_MODE);
+    latex_node(tree_1, tree_1->root, LATEX_FILE, GRAPH_MODE, RECURSION_BEGIN);
     LATEX("};\n"
     "\\addplot[color=blue, samples=1000]{"
         );
-    latex_node(tree_2, tree_2->root, LATEX_FILE, GRAPH_MODE);
+    latex_node(tree_2, tree_2->root, LATEX_FILE, GRAPH_MODE, RECURSION_BEGIN);
     LATEX(
     "};\n"
     "\\end{axis}\n"

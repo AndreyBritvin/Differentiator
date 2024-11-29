@@ -1,3 +1,4 @@
-(-(0)(x))
+(tan(sin(cos(sinh(cosh(x))))))
 (^(sinh(^(2)(x)))(^(x)(cosh(*(5)(x)))))
+(^(2)(sin(x)))
 (^(-(6)(^(x)(2)))(/(sinh(x))(cosh(x))))

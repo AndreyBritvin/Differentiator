@@ -26,18 +26,22 @@ int main(const int argc, const char** argv)
     INIT_TREE(diff_tree);
     free(diff_tree.root);
     diff_tree.root = differenciate(&diff_tree, expr_tree.root);
-    TREE_DUMP(&diff_tree, diff_tree.root, "this is tree has size = %zu", diff_tree.size);
+    TREE_DUMP(&diff_tree, diff_tree.root, "Before generating subtrees", diff_tree.size);
+    // generate_subtrees(&diff_tree, diff_tree.root, RECURSION_BEGIN);
+    // TREE_DUMP(&diff_tree, diff_tree.root, "After generating subtrees", diff_tree.size);
+    // remove_subtrees(&diff_tree, diff_tree.root);
+    // TREE_DUMP(&diff_tree, diff_tree.root, "After removing subtrees", diff_tree.size);
 
     reduce_equation(&expr_tree);
     reduce_equation(&diff_tree);
 
     printf("Latex of differrinciate equation:\n");
     print_equation(&diff_tree, expr_tree.root, diff_tree.root);
-    latex_node(&diff_tree, diff_tree.root, stdout, FORMULA_MODE);
+    latex_node(&diff_tree, diff_tree.root, stdout, FORMULA_MODE, RECURSION_BEGIN);
     printf("\n");
 
     printf("Latex of first equation:\n");
-    latex_node(&expr_tree, expr_tree.root, stdout, FORMULA_MODE);
+    latex_node(&expr_tree, expr_tree.root, stdout, FORMULA_MODE, RECURSION_BEGIN);
     printf("\n");
     paste_graph(&expr_tree, expr_tree.root);
 

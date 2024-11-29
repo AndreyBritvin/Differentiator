@@ -24,6 +24,8 @@
     #define INIT_TREE(tree_name) my_tree_t tree_name = {};  tree_ctor(&tree_name);
 #endif // NDEBUG
 
+const size_t SUBTREE_DEPTH = 5;
+
 typedef double tree_val_t;
 typedef int   op_type_t;
 
@@ -75,5 +77,7 @@ node_t* copy_subtree(my_tree_t* main_tree, node_t* node);
 err_code_t paste_instruction();
 err_code_t tree_dump(my_tree_t* tree, node_t* curr_node DEBUG_INFO, const char * curr_action, ...);
 err_code_t verificator(my_tree_t* tree, node_t* node, size_t recurs_level);
+err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_level);
+err_code_t remove_subtrees(my_tree_t* tree, node_t* curr_node);
 
 #endif // MY_TREE_H_

@@ -200,6 +200,7 @@ const char* type_to_str(node_t* node)
         case NUM: return "NUM";
         case VAR: return "VAR";
         case OP : return "OP";
+        case SUBTREE: return "SUBTREE";
         default : return "UNKNOWN";
     }
 }
@@ -209,6 +210,7 @@ char* get_data_field(node_t* node)
     if (node->type == OP)  return give_op_type(node);
     if (node->type == NUM) return give_num_type(node);
     if (node->type == VAR) return give_var_type(node);
+    if (node->type == SUBTREE) return give_var_type(node);
 }
 
 char* give_var_type(node_t *node)

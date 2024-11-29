@@ -127,3 +127,63 @@ int subtree_var_count(my_tree_t* tree, node_t* node)
 
     return ZERO_VAR;
 }
+
+err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_level)
+{
+    size_t curr_level = recurs_level % SUBTREE_DEPTH;
+    static char subtree_name = 'A';
+    if (recurs_level == 0)
+    {
+        subtree_name = 'A';
+    }
+
+    if (curr_level == 0)
+    {
+        if (curr_node->left != NULL)
+        {
+            node_t* replaced_subtree_left  = new_node(tree, SUBTREE, subtree_name++, curr_node->left, NULL);
+            replaced_subtree_left->parent =  curr_node;
+            curr_node->left->parent = replaced_subtree_left;
+            curr_node->left         = replaced_subtree_left;
+        }
+        if (curr_node->right != NULL)
+        {
+            node_t* replaced_subtree_right = new_node(tree, SUBTREE, subtree_name++, curr_node->right, NULL);
+            replaced_subtree_right->parent = curr_node;
+            curr_node->right->parent = replaced_subtree_right;
+            curr_node->right         = replaced_subtree_right;
+        }
+    }
+
+    if (curr_node->type == SUBTREE) generate_subtrees(tree, curr_node->left,  recurs_level + 1);
+    if (curr_node->type != SUBTREE && curr_node->left  != NULL)
+                                    generate_subtrees(tree, curr_node->left,  recurs_level + 1);
+    if (curr_node->type != SUBTREE && curr_node->right != NULL)
+                                    generate_subtrees(tree, curr_node->right, recurs_level + 1);
+
+    return OK;
+}
+
+err_code_t remove_subtrees(my_tree_t* tree, node_t* curr_node)
+{
+    if (curr_node->left  != NULL) remove_subtrees(tree, curr_node->left);
+    if (curr_node->right != NULL) remove_subtrees(tree, curr_node->right);
+
+    if (curr_node->type == SUBTREE)
+    {
+        if (curr_node->parent->left  == curr_node)
+        {
+            curr_node->parent->left = curr_node->left;
+            curr_node->left->parent = curr_node->parent;
+        }
+        if (curr_node->parent->right == curr_node)
+        {
+            curr_node->parent->right = curr_node->left;
+            curr_node->left->parent  = curr_node->parent;
+        }
+
+        free(curr_node);
+    }
+
+    return OK;
+}

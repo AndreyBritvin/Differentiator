@@ -173,8 +173,9 @@ int get_func_num(char* input)
 
 tree_val_t evaluate_tree(node_t* node)
 {
-    if (node->type == NUM) return node->data;
-    if (node->type == VAR) return Global_X;
+    if (node->type == NUM)     return node->data;
+    if (node->type == VAR)     return Global_X;
+    if (node->type == SUBTREE) return evaluate_tree(node->left);
 
     switch ((int) node->data)
     {
@@ -230,51 +231,58 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node)
     assert(doubled_tree);
     assert(node);
 
-    if (node->type == NUM)
+    switch (node->type)
     {
-        node_t* result = new_node(doubled_tree, NUM, 0, NULL, NULL);
-        print_equation(doubled_tree, node, result);
-        return result;
-    }
-    if (node->type == VAR)
-    {
-        node_t* result = new_node(doubled_tree, NUM, 1, NULL, NULL);
-        print_equation(doubled_tree, node, result);
-        return result;
-    }
-    if (node->type == OP)
-    {
-        switch ((int) node->data)
+        case NUM:
         {
-            case ADD: DO_DIFF(add);
-            case SUB: DO_DIFF(sub);
-            case MUL: DO_DIFF(mul);
-            case DIV: DO_DIFF(div);
+            node_t* result = new_node(doubled_tree, NUM, 0, NULL, NULL);
+            print_equation(doubled_tree, node, result);
+            return result;
+        }
+        case VAR:
+        {
+            node_t* result = new_node(doubled_tree, NUM, 1, NULL, NULL);
+            print_equation(doubled_tree, node, result);
+            return result;
+        }
+        case OP:
+        {
+            switch ((int) node->data)
+            {
+                case ADD: DO_DIFF(add);
+                case SUB: DO_DIFF(sub);
+                case MUL: DO_DIFF(mul);
+                case DIV: DO_DIFF(div);
 
-            case SIN: return diff_sin(doubled_tree, node);
-            case COS: return diff_cos(doubled_tree, node);
-            case TAN: return diff_tan(doubled_tree, node);
-            case CTG: return diff_ctg(doubled_tree, node);
+                case SIN: DO_DIFF(sin);
+                case COS: DO_DIFF(cos);
+                case TAN: DO_DIFF(tan);
+                case CTG: DO_DIFF(ctg);
 
-            case SHN: return diff_shn(doubled_tree, node);
-            case CHS: return diff_chs(doubled_tree, node);
-            case TGH: return diff_tgh(doubled_tree, node);
-            case CTH: return diff_cth(doubled_tree, node);
+                case SHN: DO_DIFF(shn);
+                case CHS: DO_DIFF(chs);
+                case TGH: DO_DIFF(tgh);
+                case CTH: DO_DIFF(cth);
 
-            case EXP: return diff_exp(doubled_tree, node);
-            case LOG: return diff_log(doubled_tree, node);
+                case EXP: DO_DIFF(exp);
+                case LOG: DO_DIFF(log);
 
-            case ARCSIN: return diff_arcsin(doubled_tree, node);
-            case ARCCOS: return diff_arccos(doubled_tree, node);
-            case ARCTAN: return diff_arctan(doubled_tree, node);
-            case ARCCTG: return diff_arcctg(doubled_tree, node);
+                case ARCSIN: DO_DIFF(arcsin);
+                case ARCCOS: DO_DIFF(arccos);
+                case ARCTAN: DO_DIFF(arctan);
+                case ARCCTG: DO_DIFF(arcctg);
 
-            case ARCSHN: return diff_arcshn(doubled_tree, node);
-            case ARCCHS: return diff_arcchs(doubled_tree, node);
-            case ARCTGH: return diff_arctgh(doubled_tree, node);
-            case ARCCTH: return diff_arccth(doubled_tree, node);
+                case ARCSHN: DO_DIFF(arcshn);
+                case ARCCHS: DO_DIFF(arcchs);
+                case ARCTGH: DO_DIFF(arctgh);
+                case ARCCTH: DO_DIFF(arccth);
 
-            default : fprintf(stderr, "Unknown operator in differenciate\n"); return NULL;
+                default : fprintf(stderr, "Unknown operator in differenciate\n"); return NULL;
+            }
+        }
+        case SUBTREE:
+        {
+            differenciate(doubled_tree, node->left);
         }
     }
 }
