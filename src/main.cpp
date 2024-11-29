@@ -1,4 +1,5 @@
 #include "differenciator.h"
+#include "simplificator.h"
 #include "my_tree.h"
 #include "my_log.h"
 #include "utils.h"

@@ -20,14 +20,6 @@ node_t* differenciate(my_tree_t* doubled_tree, node_t* node);
 
 int get_func_num(char* input);
 
-err_code_t reduce_equation(my_tree_t* to_reduce);
-node_t* simplify_tree(my_tree_t* tree, node_t* node, bool* is_changed);
-
-node_t* constant_folding(my_tree_t* tree, node_t* node, bool* is_changed);
-
-node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed, tree_val_t num_to_cmp);
-node_t* mul_0_folding(my_tree_t* tree, node_t* node, bool* is_changed);
-node_t* pow_0_folding(my_tree_t* tree, node_t* node, bool* is_changed);
 my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount);
 err_code_t add_taylor_coeff(my_tree_t* taylor_tree, tree_val_t x0, size_t power, tree_val_t coef);
 node_t* find_zero_node(my_tree_t* taylor_tree, node_t* curr_node);
