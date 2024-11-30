@@ -69,10 +69,10 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mo
     static node_t** subtrees_indexes = NULL;
     static size_t subtrees_count = 0;
 
-    if (is_graph_mode == FORMULA_MODE && recurs_level == RECURSION_BEGIN)
+    if (is_graph_mode != GRAPH_MODE && recurs_level == RECURSION_BEGIN)
     {
         subtrees_count = 0;
-        subtrees_indexes = (node_t**) calloc(256, sizeof(node_t*));
+        subtrees_indexes = (node_t**) calloc(2048, sizeof(node_t*));
         // TREE_DUMP(tree, node, "This is latex_node. Before creation nodes");
         generate_subtrees(tree, node, RECURSION_BEGIN);
         printf("node addr = %p\n", node);
@@ -121,8 +121,8 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mo
         }
         case SUBTREE:
         {
-            fprintf(output, "%c", (char) node->data);
-            printf("We are in subtree with name = %c\n", (char) node->data);
+            fprintf(output, "%s", (char*) &node->data);
+            printf("We are in subtree with name = %s\n", (char*) &node->data);
             subtrees_indexes[subtrees_count++] = node;
             // latex_node(tree, node->left, output, is_graph_mode, recurs_level + 1);
             break;
@@ -131,23 +131,32 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mo
             fprintf(stderr, "unknown operation in latex_node"); break;
     }
 
-    if (is_graph_mode == FORMULA_MODE && recurs_level == RECURSION_BEGIN)
+    if (is_graph_mode != GRAPH_MODE && recurs_level == RECURSION_BEGIN)
     {
-        print_subtrees(tree, output, subtrees_indexes);
+        print_subtrees(tree, output, subtrees_indexes, is_graph_mode); // TODO: refactor is_graph_mode
         remove_subtrees(tree, node);
     }
 
     return subtrees_indexes;
 }
 
-err_code_t print_subtrees(my_tree_t* tree, FILE* output, node_t** subtrees)
+err_code_t print_subtrees(my_tree_t* tree, FILE* output, node_t** subtrees, latex_output_mode is_diff)
 {
-    for (size_t i = 0; i < 256; i++)
+    if (is_diff == DIFF_MODE) fprintf(output, ")'");
+    fprintf(output, "\\]");
+    for (size_t i = 0; i < 2048; i++)
     {
         if (subtrees[i] == NULL) continue;
-        fprintf(output, "%c = ", (char) subtrees[i]->data);
+        fprintf(output, "Где");
+        break;
+    }
+
+    for (size_t i = 0; i < 2048; i++)
+    {
+        if (subtrees[i] == NULL) continue;
+        fprintf(output, "\\[%s = ", (char*) &(subtrees[i]->data));
         latex_node(tree, subtrees[i]->left, output, FORMULA_MODE, RECURSION_BEGIN + 1);
-        fprintf(output, "\n");
+        fprintf(output, "\\]\n");
     }
     free(subtrees);
 
@@ -263,10 +272,10 @@ err_code_t print_equation(my_tree_t* tree, node_t* node_before, node_t* node_aft
     LATEX("%s"
           "\\[(", all_jokes[rand() % lines_num]);
     // TREE_DUMP(tree, tree->root, "This is latex_node. Before creation nodes");
-    latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
-    LATEX(")'\\] \n Есть не что иное, как\n \\[");
+    latex_node(tree, node_before, LATEX_FILE, DIFF_MODE, RECURSION_BEGIN);
+    LATEX("\n Есть не что иное, как\n \\[");
     latex_node(tree, node_after, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
-    LATEX("\\]\n");
+    LATEX("\n");
 
     return OK;
 }
@@ -293,8 +302,6 @@ err_code_t print_equation_ending(my_tree_t* tree, node_t* node_before, latex_out
 
     return OK;
 }
-
-
 
 err_code_t paste_graph(my_tree_t* tree, node_t* node)
 {

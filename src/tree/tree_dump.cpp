@@ -210,8 +210,16 @@ char* get_data_field(node_t* node)
     if (node->type == OP)  return give_op_type(node);
     if (node->type == NUM) return give_num_type(node);
     if (node->type == VAR) return give_var_type(node);
-    if (node->type == SUBTREE) return give_var_type(node);
+    if (node->type == SUBTREE) return give_subtree_name(node);
 }
+
+char* give_subtree_name(node_t* node)
+{
+    char* to_ret = (char *) calloc(13, sizeof(char));
+    // printf("!!!!!!Subtree_name is %s\n", (char);
+    strcpy(to_ret, (char*) &node->data);
+
+    return to_ret;}
 
 char* give_var_type(node_t *node)
 {

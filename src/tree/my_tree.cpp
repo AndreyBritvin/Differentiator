@@ -130,25 +130,39 @@ int subtree_var_count(my_tree_t* tree, node_t* node)
 
 err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_level)
 {
-    size_t curr_level = recurs_level % SUBTREE_DEPTH;
+    size_t curr_level = (recurs_level + 1) % SUBTREE_DEPTH;
     static char subtree_name = 'A';
+    static size_t index = 0;
+
     if (recurs_level == 0)
     {
+        index = 0;
         subtree_name = 'A';
     }
 
     if (curr_level == 0)
     {
+        if (subtree_name >= 'X')
+        {
+            subtree_name = 'A';
+        }
+
         if (curr_node->left != NULL)
         {
-            node_t* replaced_subtree_left  = new_node(tree, SUBTREE, subtree_name++, curr_node->left, NULL);
+            char* index_string = (char*) calloc(8, sizeof(char));
+            sprintf(index_string, "%c%zu", subtree_name++, index++);
+            node_t* replaced_subtree_left  = new_node(tree, SUBTREE, 0, curr_node->left, NULL);
+            memcpy(&replaced_subtree_left->data, index_string, sizeof(char*));
             replaced_subtree_left->parent =  curr_node;
             curr_node->left->parent = replaced_subtree_left;
             curr_node->left         = replaced_subtree_left;
         }
         if (curr_node->right != NULL)
         {
-            node_t* replaced_subtree_right = new_node(tree, SUBTREE, subtree_name++, curr_node->right, NULL);
+            char* index_string = (char*) calloc(8, sizeof(char));
+            sprintf(index_string, "%c%zu", subtree_name++, index++);
+            node_t* replaced_subtree_right = new_node(tree, SUBTREE, 0, curr_node->right, NULL);
+            memcpy(&replaced_subtree_right->data, index_string, sizeof(char*));
             replaced_subtree_right->parent = curr_node;
             curr_node->right->parent = replaced_subtree_right;
             curr_node->right         = replaced_subtree_right;
@@ -171,6 +185,14 @@ err_code_t remove_subtrees(my_tree_t* tree, node_t* curr_node)
 
     if (curr_node->type == SUBTREE)
     {
+        // printf("Node at %p\n", curr_node);
+        // printf("node addre to delete %p with name %s\n", &curr_node->data, (char*) &curr_node->data);
+        char* to_delete = NULL;
+        memcpy(&to_delete, &(curr_node->data), sizeof(char*));
+        // printf("Addr_to_del = %p\n", &to_delete);
+        // printf("Str to delete = %s\n", &to_delete);
+        // free(&to_delete);
+
         if (curr_node->parent->left  == curr_node)
         {
             curr_node->parent->left = curr_node->left;

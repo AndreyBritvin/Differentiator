@@ -24,7 +24,7 @@
     #define INIT_TREE(tree_name) my_tree_t tree_name = {};  tree_ctor(&tree_name);
 #endif // NDEBUG
 
-const size_t SUBTREE_DEPTH = 5;
+const size_t SUBTREE_DEPTH = 4;
 
 typedef double tree_val_t;
 typedef int   op_type_t;
@@ -68,6 +68,7 @@ err_code_t print_node(node_t* tree);
 char* give_op_type(node_t *node);
 char* give_var_type(node_t *node);
 char* give_num_type(node_t *node);
+char* give_subtree_name(node_t* node);
 char* get_data_field(node_t* node);
 const char* type_to_str(node_t* node);
 

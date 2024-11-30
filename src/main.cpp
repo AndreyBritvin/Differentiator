@@ -27,10 +27,10 @@ int main(const int argc, const char** argv)
     free(diff_tree.root);
     diff_tree.root = differenciate(&diff_tree, expr_tree.root);
     TREE_DUMP(&diff_tree, diff_tree.root, "Before generating subtrees", diff_tree.size);
-    // generate_subtrees(&diff_tree, diff_tree.root, RECURSION_BEGIN);
-    // TREE_DUMP(&diff_tree, diff_tree.root, "After generating subtrees", diff_tree.size);
-    // remove_subtrees(&diff_tree, diff_tree.root);
-    // TREE_DUMP(&diff_tree, diff_tree.root, "After removing subtrees", diff_tree.size);
+    generate_subtrees(&diff_tree, diff_tree.root, RECURSION_BEGIN);
+    TREE_DUMP(&diff_tree, diff_tree.root, "After generating subtrees", diff_tree.size);
+    remove_subtrees(&diff_tree, diff_tree.root);
+    TREE_DUMP(&diff_tree, diff_tree.root, "After removing subtrees", diff_tree.size);
 
     reduce_equation(&expr_tree);
     reduce_equation(&diff_tree);
@@ -45,19 +45,19 @@ int main(const int argc, const char** argv)
     printf("\n");
     paste_graph(&expr_tree, expr_tree.root);
 
-    // my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 5);
-    // TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
-    // paste_taylor(&taylor_tree, taylor_tree.root);
-    // paste_two_graphs(&expr_tree, &taylor_tree, 0.5);
+    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 3);
+    TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
+    paste_taylor(&taylor_tree, taylor_tree.root);
+    paste_two_graphs(&expr_tree, &taylor_tree, 0.5);
 
     print_ending();
 
-    // tree_dtor(&taylor_tree);
+    tree_dtor(&taylor_tree);
     tree_dtor(&expr_tree);
     tree_dtor(&diff_tree);
     free(buffer);
 
-    // disable_latex_output();
+    disable_latex_output();
     disable_logging();
 
     return OK;
