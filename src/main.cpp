@@ -1,5 +1,6 @@
 #include "differenciator.h"
 #include "simplificator.h"
+#include "recursive_descent_parser.h"
 #include "my_tree.h"
 #include "my_log.h"
 #include "utils.h"
@@ -16,7 +17,8 @@ int main(const int argc, const char** argv)
     char *buffer = 0;
     fill_buffer(&buffer, "expressions/expr_1.txt");
     printf("%s\n", buffer);
-
+    printf("Result = %d\n", get_grammatic(buffer));
+    return 0;
     my_tree_t expr_tree = make_tree(buffer);
     TREE_DUMP(&expr_tree, expr_tree.root, "This is tree from chitalka");
     // my_tree_t test_tree = {};

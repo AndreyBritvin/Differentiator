@@ -3,6 +3,7 @@
         "include",
         "My_logging_system/include",
         "include/tree",
-        "Stack/include"
+        "Stack/include",
+        "include/recursive_folding",
     ],
 }

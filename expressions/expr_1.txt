@@ -1,3 +1,4 @@
+(2+2*3^(1*2))$
 (tanh(cosh(sinh(sinh(cosh(x))))))
 (^(sinh(^(2)(x)))(^(x)(cosh(*(5)(x)))))
 (^(2)(sin(x)))
