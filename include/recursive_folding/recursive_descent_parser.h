@@ -2,12 +2,14 @@
 #define RECURSIVE_DESCNET_PARSER_H_
 
 #include "stdlib.h"
+#include "my_tree.h"
 
-int get_grammatic(char* input);
-int get_number(char* input, size_t* pos);
-int get_expression(char* input, size_t* pos);
-int get_mul_div(char* input, size_t* pos);
-int get_exp(char* input, size_t* pos);
-int get_primary(char* input, size_t* pos);
+my_tree_t get_grammatic(char* input);
+node_t* get_number(my_tree_t* tree, char* input, size_t* pos);
+node_t* get_expression(my_tree_t* tree, char* input, size_t* pos);
+node_t* get_mul_div(my_tree_t* tree, char* input, size_t* pos);
+node_t* get_exp(my_tree_t* tree, char* input, size_t* pos);
+node_t* get_primary(my_tree_t* tree, char* input, size_t* pos);
+node_t* get_variable(my_tree_t* tree, char* input, size_t* pos);
 
 #endif // RECURSIVE_DESCNET_PARSER_H_
