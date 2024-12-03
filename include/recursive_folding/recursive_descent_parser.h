@@ -3,6 +3,7 @@
 
 #include "stdlib.h"
 #include "my_tree.h"
+#include "lexical_analysis.h"
 
 my_tree_t get_grammatic(char* input);
 node_t* get_number(my_tree_t* tree, char* input, size_t* pos);

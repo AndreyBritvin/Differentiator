@@ -156,6 +156,7 @@ err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_l
             replaced_subtree_left->parent =  curr_node;
             curr_node->left->parent = replaced_subtree_left;
             curr_node->left         = replaced_subtree_left;
+            free(index_string);
         }
         if (curr_node->right != NULL)
         {
@@ -166,6 +167,7 @@ err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_l
             replaced_subtree_right->parent = curr_node;
             curr_node->right->parent = replaced_subtree_right;
             curr_node->right         = replaced_subtree_right;
+            free(index_string);
         }
     }
 
@@ -187,8 +189,8 @@ err_code_t remove_subtrees(my_tree_t* tree, node_t* curr_node)
     {
         // printf("Node at %p\n", curr_node);
         // printf("node addre to delete %p with name %s\n", &curr_node->data, (char*) &curr_node->data);
-        char* to_delete = NULL;
-        memcpy(&to_delete, &(curr_node->data), sizeof(char*));
+        // char* to_delete = NULL;
+        // memcpy(&to_delete, &(curr_node->data), sizeof(char*));
         // printf("Addr_to_del = %p\n", &to_delete);
         // printf("Str to delete = %s\n", &to_delete);
         // free(&to_delete);

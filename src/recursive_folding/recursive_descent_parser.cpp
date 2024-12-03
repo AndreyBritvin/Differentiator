@@ -2,12 +2,25 @@
 #include <stdio.h>
 #include <math.h>
 #include "my_tree.h"
+#include <assert.h>
 
 // const char* input = "25*10*(3*(25-10*2)+1)-15$";
 // const char* input = "25+10-10*3$";
 // int pos = 0;
 
 #define SYNTAX_ERROR(...) fprintf(stderr, __VA_ARGS__);
+
+my_tree_t make_tree(char *buffer)
+{
+    assert(buffer);
+    tokens* programm_tokens = (tokens*) calloc(MAXIMUM_LEXEMS_COUNT, sizeof(tokens));
+
+    my_tree_t tree_to_fill = get_grammatic(buffer);
+    TREE_DUMP(&tree_to_fill, tree_to_fill.root, "I am gROOT (generated this tree after reading file)");
+
+    free(programm_tokens);
+    return tree_to_fill;
+}
 
 my_tree_t get_grammatic(char* input)
 {

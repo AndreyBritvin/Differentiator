@@ -17,11 +17,11 @@ int main(const int argc, const char** argv)
     char *buffer = 0;
     fill_buffer(&buffer, "expressions/expr_1.txt");
     printf("%s\n", buffer);
-    my_tree_t folding_tree = get_grammatic(buffer);
-    TREE_DUMP(&folding_tree, folding_tree.root, "This is my first folding tree");
-    tree_dtor(&folding_tree);
+    // my_tree_t folding_tree = get_grammatic(buffer);
+    // TREE_DUMP(&folding_tree, folding_tree.root, "This is my first folding tree");
+    // tree_dtor(&folding_tree);
 
-    return 0;
+    // return 0;
 
     my_tree_t expr_tree = make_tree(buffer);
     TREE_DUMP(&expr_tree, expr_tree.root, "This is tree from chitalka");

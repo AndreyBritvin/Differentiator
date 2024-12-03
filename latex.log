@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.28)  30 NOV 2024 09:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.28)  3 DEC 2024 23:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -785,6 +785,9 @@ Missing character: There is no 0 in font nullfont!
 Missing character: There is no 1 in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no t in font nullfont!
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
 ! LaTeX Error: Bad math environment delimiter.
 
@@ -792,21 +795,47 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.52 \[0\]\]
+l.98 \[1\]\]
             
-? X
- 
+? 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 99.
+Missing character: There is no . in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+[2] [3] (./latex.aux) ) 
 Here is how much of TeX's memory you used:
- 23628 strings out of 477525
- 620111 string characters out of 5832488
- 1856330 words of memory out of 5000000
- 43436 multiletter control sequences out of 15000+600000
- 519856 words of font info for 47 fonts, out of 8000000 for 9000
+ 23649 strings out of 477525
+ 620345 string characters out of 5832488
+ 1870330 words of memory out of 5000000
+ 43454 multiletter control sequences out of 15000+600000
+ 520769 words of font info for 50 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 99i,9n,103p,746b,1963s stack positions out of 10000i,1000n,20000p,200000b,200000s
-No pages of output.
+ 99i,9n,103p,746b,1965s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh
+/lh-t2a/larm1000.600pk> </home/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh
+/lh-t2a/labx1440.600pk> </home/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh
+/lh-t2a/larm1200.600pk> </home/andrey/.texlive2022/texmf-var/fonts/pk/ljfour/lh
+/lh-t2a/larm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on latex.pdf (3 pages, 146260 bytes).
 PDF statistics:
- 3 PDF objects out of 1000 (max. 8388607)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 54 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
