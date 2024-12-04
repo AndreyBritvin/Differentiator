@@ -7,6 +7,7 @@ enum node_type
     VAR,
     OP,
     SUBTREE,
+    END
 };
 
 enum op_type
@@ -33,6 +34,8 @@ enum op_type
     ARCCHS  = 19,
     ARCTGH  = 20,
     ARCCTH  = 21,
+    BRACKET_OPEN  = 22,
+    BRACKET_CLOS  = 23,
     UNKNOWN
 };
 
@@ -65,6 +68,8 @@ static operation all_ops[] = {//!!! order should be equal to enum!!!
     {ARCCHS, "arccosh"},
     {ARCTGH, "arctanh"},
     {ARCCTH, "arccoth"},
+    {BRACKET_OPEN, "("},
+    {BRACKET_CLOS, ")"},
 };
 
 #endif // OP_TYPES_H_

@@ -15,9 +15,42 @@ my_tree_t make_tree(char *buffer)
     assert(buffer);
     tokens* programm_tokens = (tokens*) calloc(MAXIMUM_LEXEMS_COUNT, sizeof(tokens));
 
+    size_t tokens_num = lexical_analysis(programm_tokens, buffer);
+
+    for (size_t i = 0; i < tokens_num; i++)
+    {
+        if (programm_tokens[i].type == OP)
+        {
+            printf("index = %02zu, type = OP , name = %s\n", i,
+                                                     all_ops[(int) programm_tokens[i].value].text);
+        }
+        else if (programm_tokens[i].type == NUM)
+        {
+            printf("index = %02zu, type = NUM, name = %lg\n", i,
+                        programm_tokens[i].value);
+        }
+        else if (programm_tokens[i].type == VAR)
+        {
+            printf("index = %02zu, type = VAR, name = %s\n", i,
+                        *(char**) &programm_tokens[i].value);
+        }
+        else if (programm_tokens[i].type == END)
+        {
+            printf("index = %02zu, type = OP , name = %c\n", i,
+                        (char) programm_tokens[i].value);
+        }
+    }
+
     my_tree_t tree_to_fill = get_grammatic(buffer);
     TREE_DUMP(&tree_to_fill, tree_to_fill.root, "I am gROOT (generated this tree after reading file)");
 
+    for (size_t i = 0; i < tokens_num; i++)
+    {
+        if (programm_tokens[i].type == VAR)
+        {
+            free(*(char**) &programm_tokens[i].value);
+        }
+    }
     free(programm_tokens);
     return tree_to_fill;
 }

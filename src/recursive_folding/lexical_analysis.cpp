@@ -2,6 +2,7 @@
 #include <string.h>
 #include <assert.h>
 #include <sys/stat.h>
+#include <ctype.h>
 
 size_t get_file_len(const char *filename)
 {
@@ -29,6 +30,76 @@ err_code_t fill_buffer(char **buffer_to_fill, const char* filename)
     fclose(input_file);
 
     return OK;
+}
+
+size_t lexical_analysis(tokens* tokens, char* buffer)
+{
+    size_t pos = 0;
+    char* end_pos = buffer;
+    size_t token_index = 0;
+
+    while ((*end_pos) != '\0' && (*end_pos) != '\n')
+    {
+        printf("current char is %c, addr = %p\n", *end_pos, end_pos);
+        if (isdigit(*end_pos))
+        {
+            tree_val_t value = strtod(end_pos, &end_pos);
+            tokens[token_index].value = value;
+            tokens[token_index].type  = NUM;
+            printf("scanned value is %lg\n", value);
+            end_pos--;
+            // printf("buffer = %p, end_pos = %p, diff = %zu\n", buffer, end_pos, end_pos - buffer);
+            token_index++;
+        }
+        else if (isalpha(*end_pos))
+        {
+            char* begin = end_pos;
+            while (isalnum(*end_pos))
+            {
+                end_pos++;
+            }
+
+            size_t key_word = is_key_word(begin, end_pos);
+            printf("key word is %zu\n", key_word);
+            if(key_word == UNKNOWN)
+            {
+                // tokens[token_index].value = ;
+                // TODO: increase more than 8 bytes
+                // memcpy(&tokens[token_index].value, begin, end_pos - begin);
+                // printf("Var_name = %8s\n", tokens[token_index].value);
+                printf("Var_name: End_pos = %p, begin = %p, diff = %zu\n", end_pos, begin, end_pos - begin);
+                char* var_name = (char*) calloc(end_pos - begin + 1, sizeof(char));
+                strncpy(var_name, begin, end_pos - begin);
+                memcpy(&tokens[token_index].value, &var_name, sizeof(tree_val_t));
+                tokens[token_index].type  = VAR;
+                token_index++;
+            }
+            else
+            {
+                tokens[token_index].value = key_word;
+                tokens[token_index].type  = OP;
+                token_index++;
+            }
+            end_pos--;
+        }
+        else
+        {
+            size_t key_word = is_key_word(end_pos, end_pos + 1);
+            printf("Something unknown opreation = %c\n", *end_pos);
+            tokens[token_index].value = key_word;
+            tokens[token_index].type  = OP;
+            token_index++;
+        }
+
+        end_pos += 1;
+    }
+
+    tokens[token_index].type  = END;
+    tokens[token_index].value = '$';
+    token_index++;
+    printf("\n");
+
+    return token_index;
 }
 
 node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* parent)
@@ -113,6 +184,19 @@ int get_func_num(char* input)
     for (size_t i = 0; i < sizeof(all_ops) / sizeof(operation); i++)
     {
         if (!strcmp(all_ops[i].text, input))
+        {
+            return i;
+        }
+    }
+
+    return UNKNOWN;
+}
+
+size_t is_key_word(char* begin, char* end)
+{
+    for (size_t i = 0; i < sizeof(all_ops) / sizeof(operation); i++)
+    {
+        if (!strncmp(all_ops[i].text, begin, end - begin))
         {
             return i;
         }

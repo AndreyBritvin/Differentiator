@@ -21,13 +21,15 @@ int main(const int argc, const char** argv)
     // TREE_DUMP(&folding_tree, folding_tree.root, "This is my first folding tree");
     // tree_dtor(&folding_tree);
 
-    // return 0;
 
     my_tree_t expr_tree = make_tree(buffer);
     TREE_DUMP(&expr_tree, expr_tree.root, "This is tree from chitalka");
     // my_tree_t test_tree = {};
 
     printf("evaluated value is %lg\n", evaluate_tree(expr_tree.root));
+
+    tree_dtor(&expr_tree);
+    return 0;
 
     INIT_TREE(diff_tree);
     free(diff_tree.root);
