@@ -295,7 +295,7 @@ err_code_t print_equation_ending(my_tree_t* tree, node_t* node_before, latex_out
     LATEX("(");
     latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
     LATEX(")");
-    if (is_diff = DIFF)
+    if (is_diff == DIFF)
     LATEX("'");
     LATEX("\n");
     node_dtor(node_before);

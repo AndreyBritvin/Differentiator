@@ -2,7 +2,8 @@
 #define LEXICAL_ANALYSIS_H_
 
 #include "op_types.h"
-#include "differenciator.h"
+#include "my_tree.h"
+// #include "differenciator.h"
 
 #define MAXIMUM_LEXEMS_COUNT 15
 
@@ -18,7 +19,9 @@ size_t get_file_len(const char *filename);
 err_code_t fill_buffer(char **buffer_to_fill, const char* filename);
 my_tree_t make_tree(char *buffer);
 node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* parent);
-size_t lexical_analysis(tokens* tokens, char* buffer);
+size_t lexical_analysis(tokens* token, char* buffer);
 size_t is_key_word(char* begin, char* end);
+err_code_t printf_tokens(tokens* programm_tokens, size_t tokens_num);
+err_code_t free_tokens  (tokens* programm_tokens, size_t tokens_num);
 
 #endif // LEXICAL_ANALYSIS_H_

@@ -32,7 +32,7 @@ err_code_t fill_buffer(char **buffer_to_fill, const char* filename)
     return OK;
 }
 
-size_t lexical_analysis(tokens* tokens, char* buffer)
+size_t lexical_analysis(tokens* token, char* buffer)
 {
     size_t pos = 0;
     char* end_pos = buffer;
@@ -44,8 +44,8 @@ size_t lexical_analysis(tokens* tokens, char* buffer)
         if (isdigit(*end_pos))
         {
             tree_val_t value = strtod(end_pos, &end_pos);
-            tokens[token_index].value = value;
-            tokens[token_index].type  = NUM;
+            token[token_index].value = value;
+            token[token_index].type  = NUM;
             printf("scanned value is %lg\n", value);
             end_pos--;
             // printf("buffer = %p, end_pos = %p, diff = %zu\n", buffer, end_pos, end_pos - buffer);
@@ -70,14 +70,14 @@ size_t lexical_analysis(tokens* tokens, char* buffer)
                 printf("Var_name: End_pos = %p, begin = %p, diff = %zu\n", end_pos, begin, end_pos - begin);
                 char* var_name = (char*) calloc(end_pos - begin + 1, sizeof(char));
                 strncpy(var_name, begin, end_pos - begin);
-                memcpy(&tokens[token_index].value, &var_name, sizeof(tree_val_t));
-                tokens[token_index].type  = VAR;
+                memcpy(&token[token_index].value, &var_name, sizeof(tree_val_t));
+                token[token_index].type  = VAR;
                 token_index++;
             }
             else
             {
-                tokens[token_index].value = key_word;
-                tokens[token_index].type  = OP;
+                token[token_index].value = key_word;
+                token[token_index].type  = OP;
                 token_index++;
             }
             end_pos--;
@@ -86,22 +86,22 @@ size_t lexical_analysis(tokens* tokens, char* buffer)
         {
             size_t key_word = is_key_word(end_pos, end_pos + 1);
             printf("Something unknown opreation = %c\n", *end_pos);
-            tokens[token_index].value = key_word;
-            tokens[token_index].type  = OP;
+            token[token_index].value = key_word;
+            token[token_index].type  = OP;
             token_index++;
         }
 
         end_pos += 1;
     }
 
-    tokens[token_index].type  = END;
-    tokens[token_index].value = '$';
+    token[token_index].type  = END;
+    token[token_index].value = '$';
     token_index++;
     printf("\n");
 
     return token_index;
 }
-
+/*
 node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* parent)
 {
     assert(buffer);
@@ -174,7 +174,7 @@ node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* pare
     }
 
     return node_to_return;
-}
+}*/
 
 int get_func_num(char* input)
 {
@@ -203,4 +203,47 @@ size_t is_key_word(char* begin, char* end)
     }
 
     return UNKNOWN;
+}
+
+err_code_t printf_tokens(tokens* programm_tokens, size_t tokens_num)
+{
+    for (size_t i = 0; i < tokens_num; i++)
+    {
+        if (programm_tokens[i].type == OP)
+        {
+            printf("index = %02zu, type = OP , name = %s\n", i,
+                                                     all_ops[(int) programm_tokens[i].value].text);
+        }
+        else if (programm_tokens[i].type == NUM)
+        {
+            printf("index = %02zu, type = NUM, name = %lg\n", i,
+                        programm_tokens[i].value);
+        }
+        else if (programm_tokens[i].type == VAR)
+        {
+            printf("index = %02zu, type = VAR, name = %s\n", i,
+                        *(char**) &programm_tokens[i].value);
+        }
+        else if (programm_tokens[i].type == END)
+        {
+            printf("index = %02zu, type = END, name = %c\n", i,
+                        (char) programm_tokens[i].value);
+        }
+    }
+
+    return OK;
+}
+
+err_code_t free_tokens(tokens* programm_tokens, size_t tokens_num)
+{
+    for (size_t i = 0; i < tokens_num; i++)
+    {
+        if (programm_tokens[i].type == VAR)
+        {
+            free(*(char**) &programm_tokens[i].value);
+        }
+    }
+    free(programm_tokens);
+
+    return OK;
 }
