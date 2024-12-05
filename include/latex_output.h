@@ -4,6 +4,8 @@
 #include "utils.h"
 #include <stdio.h>
 
+#define MAX_SUBTREES_COUNT 128000
+
 enum latex_output_mode
 {
     RECURSION_BEGIN = 0,

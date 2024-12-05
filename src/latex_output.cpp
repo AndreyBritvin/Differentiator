@@ -64,7 +64,8 @@ static size_t lines_num = 0;
 #define LEFT      node->left
 #define RIGHT     node->right
 
-node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mode is_graph_mode, size_t recurs_level)
+node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output,
+                    latex_output_mode is_graph_mode, size_t recurs_level)
 {
     assert(tree);
     assert(output);
@@ -75,7 +76,7 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mo
     if (is_graph_mode != GRAPH_MODE && recurs_level == RECURSION_BEGIN)
     {
         subtrees_count = 0;
-        subtrees_indexes = (node_t**) calloc(2048, sizeof(node_t*));
+        subtrees_indexes = (node_t**) calloc(MAX_SUBTREES_COUNT, sizeof(node_t*));
         // TREE_DUMP(tree, node, "This is latex_node. Before creation nodes");
         generate_subtrees(tree, node, RECURSION_BEGIN);
         printf("node addr = %p\n", node);
@@ -127,6 +128,10 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mo
             fprintf(output, "%s", (char*) &node->data);
             printf("We are in subtree with name = %s\n", (char*) &node->data);
             subtrees_indexes[subtrees_count++] = node;
+            if (subtrees_count >= MAX_SUBTREES_COUNT - 1)
+            {
+                assert("You should change MAX_SUBTREES_COUNT in latex_output.h" == NULL);
+            }
             // latex_node(tree, node->left, output, is_graph_mode, recurs_level + 1);
             break;
         }
@@ -136,7 +141,7 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output, latex_output_mo
 
     if (is_graph_mode != GRAPH_MODE && recurs_level == RECURSION_BEGIN)
     {
-        print_subtrees(tree, output, subtrees_indexes, is_graph_mode); // TODO: refactor is_graph_mode
+        print_subtrees(tree, output, subtrees_indexes, is_graph_mode);
         remove_subtrees(tree, node);
     }
 
@@ -147,14 +152,14 @@ err_code_t print_subtrees(my_tree_t* tree, FILE* output, node_t** subtrees, late
 {
     if (is_diff == DIFF_MODE) fprintf(output, ")'");
     fprintf(output, "\\]");
-    for (size_t i = 0; i < 2048; i++)
+    for (size_t i = 0; i < MAX_SUBTREES_COUNT; i++)
     {
         if (subtrees[i] == NULL) continue;
         fprintf(output, "Где");
         break;
     }
 
-    for (size_t i = 0; i < 2048; i++)
+    for (size_t i = 0; i < MAX_SUBTREES_COUNT; i++)
     {
         if (subtrees[i] == NULL) continue;
         fprintf(output, "\\[%s = ", (char*) &(subtrees[i]->data));

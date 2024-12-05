@@ -40,6 +40,10 @@ size_t lexical_analysis(tokens* token, char* buffer)
 
     while ((*end_pos) != '\0' && (*end_pos) != '\n')
     {
+        if (token_index >= MAXIMUM_LEXEMS_COUNT)
+        {
+            assert("You should increase MAXIMUM_LEXEMS_COUNT" == NULL);
+        }
         printf("current char is %c, addr = %p\n", *end_pos, end_pos);
         if (isdigit(*end_pos))
         {
