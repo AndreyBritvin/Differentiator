@@ -338,7 +338,7 @@ err_code_t paste_graph(my_tree_t* tree, node_t* node, borders border)
     if (gnuplot_pipe == NULL) return ERROR_FILE;
 
     fprintf(gnuplot_pipe, "set term pngcairo\n");
-    fprintf(gnuplot_pipe, "set output \"tree_dump/graphs/%zu.png\"\n", image_counter);
+    fprintf(gnuplot_pipe, "set output \"tree_dump/graphs/%zu.png\"\n set grid\n", image_counter);
     fprintf(gnuplot_pipe, "plot [%lg:%lg] ", border.left, border.right);
     latex_node(tree, node, gnuplot_pipe, GRAPH_MODE, RECURSION_BEGIN);
     fprintf(gnuplot_pipe, "\n");
@@ -360,7 +360,7 @@ err_code_t paste_taylor(my_tree_t* tree, node_t* node)
     LATEX("Вот тейлорово разложение. После контрольной в самый раз\n"
           "\\[");
     latex_node(tree, node, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
-    LATEX("\\]\n");
+    LATEX("\n");
 
     return OK;
 }
@@ -384,12 +384,12 @@ err_code_t paste_two_graphs(my_tree_t* tree_1, my_tree_t* tree_2, tree_val_t x0)
 {
     static size_t image_counter = 1;
     borders delta_x0 = get_border(x0);
-    LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 %lg}\n", x0);
+    LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 = %lg}\n", x0);
 
     FILE* gnuplot_pipe = popen("gnuplot -p", "w");
 
     fprintf(gnuplot_pipe, "set term pngcairo\n");
-    fprintf(gnuplot_pipe, "set output \"tree_dump/graphs/%zu.png\"\n", image_counter);
+    fprintf(gnuplot_pipe, "set output \"tree_dump/graphs/%zu.png\"\n set grid\n", image_counter);
     fprintf(gnuplot_pipe, "plot [%lg:%lg] ", delta_x0.left, delta_x0.right);
     latex_node(tree_1, tree_1->root, gnuplot_pipe, GRAPH_MODE, RECURSION_BEGIN);
     fprintf(gnuplot_pipe, " with lines title \"expr\", ", delta_x0.left, delta_x0.right);
