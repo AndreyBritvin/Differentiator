@@ -17,19 +17,16 @@ int main(const int argc, const char** argv)
     char *buffer = 0;
     fill_buffer(&buffer, "expressions/expr_1.txt");
     printf("%s\n", buffer);
-    // my_tree_t folding_tree = get_grammatic(buffer);
-    // TREE_DUMP(&folding_tree, folding_tree.root, "This is my first folding tree");
-    // tree_dtor(&folding_tree);
-
 
     my_tree_t expr_tree = make_tree(buffer);
     TREE_DUMP(&expr_tree, expr_tree.root, "This is tree from chitalka");
     // my_tree_t test_tree = {};
+    print_equation_begining(&expr_tree, expr_tree.root, "Давайте продифференцируем это выражение");
 
     printf("evaluated value is %lg\n", evaluate_tree(expr_tree.root));
 
-    tree_dtor(&expr_tree);
-    return 0;
+    // tree_dtor(&expr_tree);
+    // return 0;
 
     INIT_TREE(diff_tree);
     free(diff_tree.root);
@@ -43,17 +40,12 @@ int main(const int argc, const char** argv)
     reduce_equation(&expr_tree);
     reduce_equation(&diff_tree);
 
-    printf("Latex of differrinciate equation:\n");
-    print_equation(&diff_tree, expr_tree.root, diff_tree.root);
-    latex_node(&diff_tree, diff_tree.root, stdout, FORMULA_MODE, RECURSION_BEGIN);
-    printf("\n");
+    print_equation_begining(&diff_tree, diff_tree.root, "Итоговый ответ: \n");
 
-    printf("Latex of first equation:\n");
-    latex_node(&expr_tree, expr_tree.root, stdout, FORMULA_MODE, RECURSION_BEGIN);
-    printf("\n");
-    paste_graph(&expr_tree, expr_tree.root);
+    borders graph_borders = get_border();
+    paste_graph(&expr_tree, expr_tree.root, graph_borders);
 
-    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 3);
+    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 5);
     TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
     paste_taylor(&taylor_tree, taylor_tree.root);
     paste_two_graphs(&expr_tree, &taylor_tree, 0.5);

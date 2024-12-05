@@ -244,6 +244,8 @@ err_code_t print_introduction()
 {
     LATEX("\\documentclass{article}\n"
     "\\usepackage[T2A]{fontenc}\n"
+    "\\usepackage{graphicx}\n"
+    "\\graphicspath{ {./tree_dump/graphs/} }\n"
     "\\usepackage[margin=0.25in]{geometry}\n"
     "\\usepackage{pgfplots}\n"
     "\\pgfplotsset{width=10cm,compat=1.9}\n\n"
@@ -283,9 +285,9 @@ err_code_t print_equation(my_tree_t* tree, node_t* node_before, node_t* node_aft
 err_code_t print_equation_begining(my_tree_t* tree, node_t* node_before, const char* text)
 {
     LATEX("%s\n", text);
-    LATEX("\\[(");
+    LATEX("\\[");
     latex_node(tree, node_before, LATEX_FILE, FORMULA_MODE, RECURSION_BEGIN);
-    LATEX(")'\n");
+    LATEX("\n");
 
     return OK;
 }
@@ -303,33 +305,47 @@ err_code_t print_equation_ending(my_tree_t* tree, node_t* node_before, latex_out
     return OK;
 }
 
-err_code_t paste_graph(my_tree_t* tree, node_t* node)
+borders get_border()
+{
+    double left = 0, right = 0;
+    printf("Введите левую границу:");
+    while (scanf("%lg", &left) == 0)
+    {
+        printf("Пожалуйста, введите число\n");
+    }
+
+    printf("Введите правую границу:");
+    while (scanf("%lg", &right) == 0)
+    {
+        printf("Пожалуйста, введите число\n");
+    }
+    borders to_ret = {};
+    to_ret.left  = left;
+    to_ret.right = right;
+
+    return to_ret;
+}
+
+err_code_t paste_graph(my_tree_t* tree, node_t* node, borders border)
 {
     LATEX("\\section{Кривульки}\n");
+    static size_t image_counter = 0;
+    FILE* gnuplot_pipe = popen("gnuplot -p", "w");
 
-    LATEX(
-    "\\begin{tikzpicture}\n"
-    "\\begin{axis}["
-    "xmin=-11,xmax=11,\n"
-    "ymin=-11,ymax=11,\n"
-    "grid=both,\n"
-    "grid style={line width=.1pt, draw=gray!10},\n"
-    "major grid style={line width=.2pt,draw=gray!50},\n"
-    "axis lines=middle,\n"
-    "minor tick num=4,\n"
-    "axis line style={latex-latex},\n"
-    "ticklabel style={font=\\tiny,fill=white},\n"
-    "xlabel style={at={(ticklabel* cs:1)},anchor=north west},\n"
-    "ylabel style={at={(ticklabel* cs:1)},anchor=south west}\n"
-    "]\n"
-    "\\addplot[color=red, samples=1000]{"
-        );
-    latex_node(tree, node, LATEX_FILE, GRAPH_MODE, RECURSION_BEGIN);
-    LATEX(
-    "};\n"
-    "\\end{axis}\n"
-    "\\end{tikzpicture}\n"
-        );
+    if (gnuplot_pipe == NULL) return ERROR_FILE;
+
+    fprintf(gnuplot_pipe, "set term pngcairo\n");
+    fprintf(gnuplot_pipe, "set output \"tree_dump/graphs/%zu.png\"\n", image_counter);
+    fprintf(gnuplot_pipe, "plot [%lg:%lg] ", border.left, border.right);
+    latex_node(tree, node, gnuplot_pipe, GRAPH_MODE, RECURSION_BEGIN);
+    fprintf(gnuplot_pipe, "\n");
+
+    LATEX("\\includegraphics[width=\\textwidth, height=0.9\\textheight,"
+                 "keepaspectratio]{tree_dump/graphs/%zu.png}\n", image_counter);
+
+    pclose(gnuplot_pipe);
+
+    image_counter += 2;
 
     return OK;
 }
@@ -377,6 +393,14 @@ err_code_t paste_two_graphs(my_tree_t* tree_1, my_tree_t* tree_2, tree_val_t x0)
     "\\end{axis}\n"
     "\\end{tikzpicture}\n"
         );
+
+    return OK;
+}
+
+err_code_t print_tree_value(my_tree_t* tree, tree_val_t x0)
+{
+    tree_val_t result = evaluate_tree(tree->root);
+    LATEX("Подставляя x = %lg получим что это выражение коллапсирует в %lg\n\n", x0, result);
 
     return OK;
 }

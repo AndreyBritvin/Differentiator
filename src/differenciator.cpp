@@ -166,6 +166,10 @@ my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
     {
         INIT_TREE(diff_tree);
         free(diff_tree.root);
+
+        print_equation_begining(&diff_tree, diff_subtree.root,
+                "\n\n\nДавайте продифференцируем это выражение для Тейлора, жалко что ли?");
+
         diff_tree.root = differenciate(&diff_tree, diff_subtree.root);
         reduce_equation(&diff_tree);
 
@@ -175,6 +179,8 @@ my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
         add_taylor_coeff(&taylor_tree, x0, i, coef_n);
         // TREE_DUMP(&diff_subtree, diff_subtree.root, "This is diff_subtree at i = %zu", i);
         // TREE_DUMP(&diff_tree, diff_tree.root, "This is diff_tree at i = %zu", i);
+        print_equation_begining(&diff_tree, diff_tree.root, "Промежуточная производная: \n");
+        print_tree_value(&diff_tree, x0);
 
         diff_subtree.size = 100;
         tree_dtor(&diff_subtree);

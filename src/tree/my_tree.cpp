@@ -24,7 +24,7 @@ node_t* new_node(my_tree_t* tree, op_type_t type, tree_val_t data, node_t* left_
 err_code_t tree_ctor(my_tree_t* tree)
 {
     tree->size = 1;
-    tree->root = new_node(tree, 0, 0, NULL, NULL);
+    // tree->root = new_node(tree, 0, 0, NULL, NULL);
 
     return OK;
 }
@@ -140,7 +140,8 @@ err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_l
         subtree_name = 'A';
     }
 
-    if (curr_level == 0)
+    if (curr_level == 0 && (curr_node->left  != NULL && curr_node->left ->type == OP &&
+                            curr_node->right != NULL && curr_node->right->type == OP ))
     {
         if (subtree_name >= 'X')
         {

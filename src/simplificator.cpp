@@ -10,9 +10,9 @@ err_code_t reduce_equation(my_tree_t* to_reduce)
     while (is_changed)
     {
         is_changed = false;
-        TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
+        // TREE_DUMP(to_reduce, to_reduce->root, "Before reducing in reduce function. Size = %zu", to_reduce->size);
         to_reduce->root = simplify_tree(to_reduce, to_reduce->root, &is_changed);
-        TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
+        // TREE_DUMP(to_reduce, to_reduce->root, "Now this is reduced tree");
     }
 
     return OK;

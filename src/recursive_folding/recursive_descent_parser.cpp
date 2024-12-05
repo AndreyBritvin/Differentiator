@@ -45,13 +45,6 @@ node_t* get_func(my_tree_t* tree, tokens* input, size_t* pos)
     node_t* left_subtree = get_primary(tree, input, pos);
     node_t* to_ret = new_node(tree, OP, func, left_subtree, NULL);
     left_subtree->parent = to_ret;
-    // while (ARCCTH >= (int) input[*pos].value >= SIN)
-    // {
-    //     (*pos)++;
-    //     node_t* val_2 = get_primary(tree, input, pos);
-    //     val = new_node(tree, OP, (int) input[*pos].value, val, val_2);
-    //     val->left->parent = val->right->parent = val;
-    // }
 
     return to_ret;
 }
