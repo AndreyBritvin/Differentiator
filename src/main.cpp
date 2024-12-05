@@ -45,10 +45,13 @@ int main(const int argc, const char** argv)
     borders graph_borders = get_border();
     paste_graph(&expr_tree, expr_tree.root, graph_borders);
 
-    my_tree_t taylor_tree = get_taylor_series(&expr_tree, 0.5, 5);
+    tree_val_t x0_for_taylor = 0;
+    printf("Введите точку x0 для тейлора:");
+    scanf("%lg", &x0_for_taylor);
+    my_tree_t taylor_tree = get_taylor_series(&expr_tree, x0_for_taylor, 5);
     TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
     paste_taylor(&taylor_tree, taylor_tree.root);
-    paste_two_graphs(&expr_tree, &taylor_tree, 0.5);
+    paste_two_graphs(&expr_tree, &taylor_tree, x0_for_taylor);
 
     print_ending();
 

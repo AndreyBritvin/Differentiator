@@ -22,6 +22,9 @@ static size_t lines_num = 0;
 #define  POWER_OUT(text, L, R)  fprintf(output, "(");                       \
                                 latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
                                 fprintf(output, ")");                       \
+                                if (is_graph_mode == GRAPH_MODE)            \
+                                fprintf(output, "**");                      \
+                                else                                        \
                                 fprintf(output, text);                      \
                                 if (is_graph_mode == GRAPH_MODE)            \
                                 fprintf(output, "(");                       \
@@ -362,37 +365,43 @@ err_code_t paste_taylor(my_tree_t* tree, node_t* node)
     return OK;
 }
 
+borders get_border(tree_val_t x0)
+{
+    double delta = 0;
+    printf("Введите дельту для дельта окрестности:");
+    while (scanf("%lg", &delta) == 0)
+    {
+        printf("Пожалуйста, введите число\n");
+    }
+    borders to_ret = {};
+    to_ret.left  = x0 - delta;
+    to_ret.right = x0 + delta;
+
+    return to_ret;
+}
+
 err_code_t paste_two_graphs(my_tree_t* tree_1, my_tree_t* tree_2, tree_val_t x0)
 {
-    LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 %lf}\n", x0);
+    static size_t image_counter = 1;
+    borders delta_x0 = get_border(x0);
+    LATEX("\\section{Кривляние тейлора в $\\delta$ - окрестности точки x0 %lg}\n", x0);
 
-    LATEX(
-    "\\begin{tikzpicture}\n"
-    "\\begin{axis}["
-    "xmin=-11,xmax=11,\n"
-    "ymin=-11,ymax=11,\n"
-    "grid=both,\n"
-    "grid style={line width=.1pt, draw=gray!10},\n"
-    "major grid style={line width=.2pt,draw=gray!50},\n"
-    "axis lines=middle,\n"
-    "minor tick num=4,\n"
-    "axis line style={latex-latex},\n"
-    "ticklabel style={font=\\tiny,fill=white},\n"
-    "xlabel style={at={(ticklabel* cs:1)},anchor=north west},\n"
-    "ylabel style={at={(ticklabel* cs:1)},anchor=south west}\n"
-    "]\n"
-    "\\addplot[color=red, samples=1000]{"
-        );
-    latex_node(tree_1, tree_1->root, LATEX_FILE, GRAPH_MODE, RECURSION_BEGIN);
-    LATEX("};\n"
-    "\\addplot[color=blue, samples=1000]{"
-        );
-    latex_node(tree_2, tree_2->root, LATEX_FILE, GRAPH_MODE, RECURSION_BEGIN);
-    LATEX(
-    "};\n"
-    "\\end{axis}\n"
-    "\\end{tikzpicture}\n"
-        );
+    FILE* gnuplot_pipe = popen("gnuplot -p", "w");
+
+    fprintf(gnuplot_pipe, "set term pngcairo\n");
+    fprintf(gnuplot_pipe, "set output \"tree_dump/graphs/%zu.png\"\n", image_counter);
+    fprintf(gnuplot_pipe, "plot [%lg:%lg] ", delta_x0.left, delta_x0.right);
+    latex_node(tree_1, tree_1->root, gnuplot_pipe, GRAPH_MODE, RECURSION_BEGIN);
+    fprintf(gnuplot_pipe, " with lines title \"expr\", ", delta_x0.left, delta_x0.right);
+    latex_node(tree_2, tree_2->root, gnuplot_pipe, GRAPH_MODE, RECURSION_BEGIN);
+    fprintf(gnuplot_pipe, " with lines title \"taylor\"\n");
+
+    pclose(gnuplot_pipe);
+
+    LATEX("\\includegraphics[width=\\textwidth, height=0.9\\textheight,"
+                 "keepaspectratio]{tree_dump/graphs/%zu.png}\n", image_counter);
+
+    image_counter += 2;
 
     return OK;
 }
