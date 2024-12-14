@@ -37,6 +37,8 @@ size_t lexical_analysis(tokens* token, char* buffer)
     size_t pos = 0;
     char* end_pos = buffer;
     size_t token_index = 0;
+    size_t lines  = 1;
+    size_t column = 1;
 
     while ((*end_pos) != '\0' && (*end_pos) != '\n')
     {
@@ -96,6 +98,11 @@ size_t lexical_analysis(tokens* token, char* buffer)
         }
 
         end_pos += 1;
+
+        token[token_index].line   = lines;
+        token[token_index].column = column;
+
+        skip_spaces(&end_pos, &column, &lines);
     }
 
     token[token_index].type  = END;
@@ -105,6 +112,27 @@ size_t lexical_analysis(tokens* token, char* buffer)
 
     return token_index;
 }
+
+err_code_t skip_spaces(char** input, size_t* column, size_t* lines)
+{
+    printf("symbol to skip: %d\n", (int) **input);
+    while (isblank(**input) || **input == '\n')
+    {
+        printf("symbol to skip: %d\n", (int) **input);
+
+        (*column)++;
+        if (**input == '\n')
+        {
+            printf("Increasing lines\n");
+            (*column) = 1;
+            (*lines)++;
+        }
+        (*input)++;
+    }
+
+    return OK;
+}
+
 /*
 node_t* fill_node(char * buffer, size_t* position, my_tree_t* tree, node_t* parent)
 {

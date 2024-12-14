@@ -42,7 +42,15 @@ node_t* get_func(my_tree_t* tree, tokens* input, size_t* pos)
 {
     int func = (int) input[*pos].value;
     (*pos)++;
-    node_t* left_subtree = get_primary(tree, input, pos);
+
+    if ((int) input[*pos].value != BRACKET_OPEN) SYNTAX_ERROR("At pos = %zu expected (, but %c instead\n", *pos, input[*pos].value);
+    (*pos)++;
+
+    node_t* left_subtree = get_expression(tree, input, pos);
+
+    if ((int) input[*pos].value != BRACKET_CLOS) SYNTAX_ERROR("At pos = %zu expected ), but %c instead\n", *pos, input[*pos].value);
+    (*pos)++;
+
     node_t* to_ret = new_node(tree, OP, func, left_subtree, NULL);
     left_subtree->parent = to_ret;
 

@@ -179,7 +179,7 @@ my_tree_t get_taylor_series(my_tree_t* expr_tree, tree_val_t x0, size_t amount)
         diff_tree.root = differenciate(&diff_tree, diff_subtree.root);
         reduce_equation(&diff_tree);
 
-        // TREE_DUMP(&diff_subtree, diff_subtree.root, "This is diff_subtree at i = %zu", i);
+        // TREE_DUMP(&diff_subtree, diff_subtree.root, "This is diff_subtree at power n = %zu", i);
         // TREE_DUMP(&diff_tree, diff_tree.root, "This is diff_tree at i = %zu", i);
         print_equation_begining(&diff_tree, diff_tree.root, "Промежуточная производная: \n");
 

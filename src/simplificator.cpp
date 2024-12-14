@@ -142,10 +142,10 @@ node_t* mul_1_folding(my_tree_t* tree, node_t* node, bool* is_changed, tree_val_
 
     node_t* to_ret = NULL;
     *is_changed = true;
-    if      (node->left->type == NUM
+    if      (node->left->type == NUM // TODO: macros to check type and value
         &&   is_double_equal(node->left->data,  num_to_cmp)) to_ret = copy_subtree(tree, node->right);
     else if (node->right->type == NUM
-        &&   is_double_equal(node->right->data, num_to_cmp)) to_ret = copy_subtree(tree, node->left);
+        &&   is_double_equal(node->right->data, num_to_cmp)) to_ret = copy_subtree(tree, node->left); // TODO: optimize deleting
 
     if (node == tree->root) tree->root = to_ret;
     to_ret->parent = node->parent;

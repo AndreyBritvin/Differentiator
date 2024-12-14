@@ -140,15 +140,15 @@ err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_l
         subtree_name = 'A';
     }
 
-    if (curr_level == 0 && (curr_node->left  != NULL && curr_node->left ->type == OP &&
-                            curr_node->right != NULL && curr_node->right->type == OP ))
+    if (curr_level == 0)// && (curr_node->left  != NULL && curr_node->left ->type == OP &&
+                        //    curr_node->right != NULL && curr_node->right->type == OP ))
     {
         if (subtree_name >= 'X')
         {
             subtree_name = 'A';
         }
 
-        if (curr_node->left != NULL)
+        if (curr_node->left != NULL && curr_node->left->type == OP)
         {
             char* index_string = (char*) calloc(8, sizeof(char));
             sprintf(index_string, "%c%zu", subtree_name++, index++);
@@ -159,7 +159,7 @@ err_code_t generate_subtrees(my_tree_t* tree, node_t* curr_node, size_t recurs_l
             curr_node->left         = replaced_subtree_left;
             free(index_string);
         }
-        if (curr_node->right != NULL)
+        if (curr_node->right != NULL && curr_node->right->type == OP)
         {
             char* index_string = (char*) calloc(8, sizeof(char));
             sprintf(index_string, "%c%zu", subtree_name++, index++);

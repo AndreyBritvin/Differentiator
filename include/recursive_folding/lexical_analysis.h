@@ -23,5 +23,6 @@ size_t lexical_analysis(tokens* token, char* buffer);
 size_t is_key_word(char* begin, char* end);
 err_code_t printf_tokens(tokens* programm_tokens, size_t tokens_num);
 err_code_t free_tokens  (tokens* programm_tokens, size_t tokens_num);
+err_code_t skip_spaces(char** input, size_t* column, size_t* lines);
 
 #endif // LEXICAL_ANALYSIS_H_

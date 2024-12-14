@@ -19,7 +19,7 @@ library:
 	@$(CC) $(CFLAGS) -c $(INCLUDE) $(SRC_FILES) My_logging_system/log_lib.a -o $(BUILD_FILES)
 
 run:
-	./differenciator.out
+	./differenciator.out expressions/expr_1.txt
 
 clean:
 	rm -rf build

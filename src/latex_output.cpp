@@ -11,11 +11,18 @@ static size_t lines_num = 0;
 
 #define LATEX(...) if (LATEX_FILE != NULL) fprintf(LATEX_FILE, __VA_ARGS__);
 
+//TODO: FIX brackets
 #define  INFIX_OUT(text, L, R)  fprintf(output, "(");                       \
                                 latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
                                 fprintf(output, text);                      \
                                 latex_node(tree, R, output, is_graph_mode, recurs_level + 1); \
                                 fprintf(output, ")");
+
+#define  INFIX_OUT2(text, L, R)  fprintf(output, "");                       \
+                                latex_node(tree, L, output, is_graph_mode, recurs_level + 1); \
+                                fprintf(output, text);                      \
+                                latex_node(tree, R, output, is_graph_mode, recurs_level + 1); \
+                                fprintf(output, "");
                                 // fprintf(output, ")");
                                 // fprintf(output, "(");
 
@@ -79,7 +86,7 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output,
         subtrees_indexes = (node_t**) calloc(MAX_SUBTREES_COUNT, sizeof(node_t*));
         // TREE_DUMP(tree, node, "This is latex_node. Before creation nodes");
         generate_subtrees(tree, node, RECURSION_BEGIN);
-        printf("node addr = %p\n", node);
+        // printf("node addr = %p\n", node);
         // TREE_DUMP(tree, node, "This is latex_node. After creation nodes");
     }
 
@@ -93,7 +100,7 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output,
             {
                 case ADD:  INFIX_OUT(TYPE_NAME, LEFT, RIGHT); break;
                 case SUB:  INFIX_OUT(TYPE_NAME, LEFT, RIGHT); break;
-                case MUL:  INFIX_OUT(TYPE_NAME, LEFT, RIGHT); break;
+                case MUL:  INFIX_OUT2(TYPE_NAME, LEFT, RIGHT); break;
                 case DIV: PREFIX_OUT("\\frac", LEFT, RIGHT); break;
 
                 case SIN:   UNAR_OUT(TYPE_NAME, LEFT); break;
@@ -126,7 +133,7 @@ node_t** latex_node(my_tree_t* tree, node_t* node, FILE* output,
         case SUBTREE:
         {
             fprintf(output, "%s", (char*) &node->data);
-            printf("We are in subtree with name = %s\n", (char*) &node->data);
+            // printf("We are in subtree with name = %s\n", (char*) &node->data);
             subtrees_indexes[subtrees_count++] = node;
             if (subtrees_count >= MAX_SUBTREES_COUNT - 1)
             {

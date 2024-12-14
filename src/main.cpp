@@ -10,12 +10,18 @@
 
 int main(const int argc, const char** argv)
 {
+    if (argc != 2)
+    {
+        printf("Sorry, enter:\n%s input_filename.txt\n", argv[0]);
+        return EXIT_SUCCESS;
+    }
+
     enable_logging("tree_dump/differenciator.html");
     enable_latex_output("tree_dump/latex.tex", "expressions/differenciate_obvious.txt");
     print_introduction();
 
     char *buffer = 0;
-    fill_buffer(&buffer, "expressions/expr_1.txt");
+    fill_buffer(&buffer, argv[1]);
     printf("%s\n", buffer);
 
     my_tree_t expr_tree = make_tree(buffer);
@@ -39,6 +45,7 @@ int main(const int argc, const char** argv)
 
     reduce_equation(&expr_tree);
     reduce_equation(&diff_tree);
+    print_equation_begining(&expr_tree, expr_tree.root, "Исходное выражение");
 
     print_equation_begining(&diff_tree, diff_tree.root, "Итоговый ответ: \n");
 
@@ -48,7 +55,12 @@ int main(const int argc, const char** argv)
     tree_val_t x0_for_taylor = 0;
     printf("Введите точку x0 для тейлора:");
     scanf("%lg", &x0_for_taylor);
-    my_tree_t taylor_tree = get_taylor_series(&expr_tree, x0_for_taylor, 6);
+
+    tree_val_t n_for_taylor = 0;
+    printf("Введите степень n для тейлора:");
+    scanf("%lg", &n_for_taylor);
+
+    my_tree_t taylor_tree = get_taylor_series(&expr_tree, x0_for_taylor, n_for_taylor);
     TREE_DUMP(&taylor_tree, taylor_tree.root, "This is taylor tree");
     paste_taylor(&taylor_tree, taylor_tree.root);
     paste_two_graphs(&expr_tree, &taylor_tree, x0_for_taylor);
